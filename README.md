@@ -7,7 +7,9 @@ The WeiBo API dump data and some Object-C class is from [YYKit](https://github.c
 
 1. checkout PandaDemo 
 
-  `git clone https://github.com/nangege/PandaDemo`
+   ```bash
+   git clone https://github.com/nangege/PandaDemo
+   ```
   
 2. init submodule
    
@@ -15,7 +17,7 @@ The WeiBo API dump data and some Object-C class is from [YYKit](https://github.c
    git submodule init. 
    git submodule update
    ```
-3. update frameword 
+3. update framework
    
    ```bash
    carthage update
