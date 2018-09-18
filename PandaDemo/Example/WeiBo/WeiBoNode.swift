@@ -325,6 +325,11 @@ class ToolBarNode: ViewNode{
       button.setBackgroundColor(color: UIColor(hex6: 0xf0f0f0), for: .highlighted)
       button.setBackgroundColor(color: .white, for: .normal)
       button.textFirst = false
+      
+      button.addAction(for: .touchDown, action: {_ in
+        print("touch down")
+      })
+      
     }
     
     [topLine,bottomLine].forEach { (node) in
