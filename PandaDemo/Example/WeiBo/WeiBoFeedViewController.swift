@@ -20,11 +20,10 @@ class WeiBoFeedViewController: UITableViewController {
       tableView.separatorStyle = .none
       
       // optimize point. if use estimatedRowHeight, it will create a lot of new cell when tableView is load, which will slow down launch time
-      tableView.estimatedRowHeight = 0
+      tableView.estimatedRowHeight = 180
       statusNode.width == UIScreen.main.bounds.width
 //      statusNode.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 500)
     
-      
       DispatchQueue.global().async {
         for index in 0..<8{
           autoreleasepool {
@@ -50,12 +49,9 @@ class WeiBoFeedViewController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "WeiBo",for: indexPath) as! WeiBoCell
-//    let time = measureTime(desc: "cellForRow:") {
-      cell.statusNode.disableLayout()
-      cell.update(for: statusViewModels[indexPath.row], needLayout: false)
-      cell.statusNode.apply(statusViewModels[indexPath.row].layoutValues!)
-//    }
-    
+    cell.statusNode.disableLayout()
+    cell.update(for: statusViewModels[indexPath.row], needLayout: false)
+    cell.statusNode.apply(statusViewModels[indexPath.row].layoutValues!)
     return cell
   }
   
