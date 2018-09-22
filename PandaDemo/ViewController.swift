@@ -26,9 +26,10 @@ class ViewController: UIViewController {
     testAddConstraintPerformance()
     testUpdateConstantPerformance()
 
-    for count in [5,10,20,30,40,50,60,70]{
+    for count in [5,10,20,30,40,50,60,70,100,200]{
       print("=========== \(count) ============")
       testNest(count)
+      testNestView(count)
       testNodelayout(count)
       testViewLayout(count)
       testAutoLayout(count)
@@ -37,7 +38,7 @@ class ViewController: UIViewController {
     
     let node = ViewNode()
     node.width == 100
-    node.width >= 200
+    node.width == 200
     node.layoutIfNeeded()
     print(node.frame)
   }
@@ -81,6 +82,29 @@ class ViewController: UIViewController {
     }
   }
   
+  func testNestView(_ testNumber: Int = 100) {
+    
+    measureTime(desc:"testNestViewPerformance ") {
+      let node = UIView()
+      var nodes = [UIView]()
+      node.size == (320.0,640.0)
+      for index in 0..<testNumber{
+        
+        let newNode = UIView()
+        if nodes.count == 0{
+          node.addSubview(newNode)
+          newNode.edge == node + (0.5,0.5,0.5,0.5)
+        }else{
+          let aNode = nodes[index - 1]
+          aNode.addSubview(newNode)
+          newNode.edge == aNode.edge.insets((1,1,1,1))
+        }
+        nodes.append(newNode)
+      }
+      node.layoutIfEnabled()
+    }
+  }
+  
   func testNodelayout(_ testNumber: Int = 100) {
     measureTime(desc:"testNodelayoutPerformance ") {
       let node = ViewNode()
@@ -99,14 +123,14 @@ class ViewController: UIViewController {
         let newNode = ViewNode()
         node.addSubnode(newNode)
         
-        newNode.left >= 0
+        newNode.left >= node.left
         newNode.right <= node.right
         
-        newNode.top >= 20
+        newNode.top >= node.top + 20
         newNode.bottom <= node.bottom - 20
         
         newNode.left == leftNode.left + CGFloat(arc4random()%20) ~ .strong
-        node.top == rightNode.top + CGFloat(arc4random()%20) ~ .strong
+        newNode.top == rightNode.top + CGFloat(arc4random()%20) ~ .strong
         
         nodes.append(newNode)
       }
@@ -132,14 +156,14 @@ class ViewController: UIViewController {
         let newNode = UIView()
         node.addSubview(newNode)
         
-        newNode.left >= 0
+        newNode.left >= node.left
         newNode.right <= node.right
         
-        newNode.top >= 20
+        newNode.top >= node.top + 20
         newNode.bottom <= node.bottom - 20
         
         newNode.left == leftNode.left + CGFloat(arc4random()%20) ~ .strong
-        node.top == rightNode.top + CGFloat(arc4random()%20) ~ .strong
+        newNode.top == rightNode.top + CGFloat(arc4random()%20) ~ .strong
         
         nodes.append(newNode)
       }
@@ -151,7 +175,9 @@ class ViewController: UIViewController {
     measureTime(desc:"testAutolayoutPerformance ") {
       let node = UIView()
       var nodes = [UIView]()
-      node.frame = CGRect(x: 0, y: 0, width: 320, height: 640)
+      node.widthAnchor.constraint(equalToConstant: 320).isActive = true
+      node.heightAnchor.constraint(equalToConstant: 640).isActive = true
+      node.translatesAutoresizingMaskIntoConstraints = false
       for _ in 0..<testNumber{
         var leftNode = node
         var rightNode = node
@@ -227,13 +253,13 @@ class ViewController: UIViewController {
     
 
   func testAddConstraintPerformance() {
-    
-    let vars = (0..<500).map{ _ in return Variable()}
+    let constraintNumber = 500
+    let vars = (0..<constraintNumber).map{ _ in return Variable()}
     
     var constraints = [Constraint]()
     
     let exprMaxVars: UInt32 = 3
-    let constraintNumber = 500
+    
     let constraintMake = constraintNumber * 2
     let inEqualProb = 0.12
     
@@ -241,7 +267,7 @@ class ViewController: UIViewController {
       let expr = Expression(constant: grainedRand() * 20.0 - 10)
       let exprVarNumber = Int(uniformramdom()*Double(exprMaxVars)) + 1
       for _ in 0..<exprVarNumber{
-        let index = Int(uniformramdom()*499)
+        let index = Int(uniformramdom()*Double(constraintNumber - 1))
         let variable = vars[index]
         expr += variable * (grainedRand() * 10.0 - 5.0)
       }
