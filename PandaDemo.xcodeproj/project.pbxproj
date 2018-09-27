@@ -46,7 +46,7 @@
 		383D08BF207E4B7E00625A33 /* WeiBoFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383D08BC207E4B7D00625A33 /* WeiBoFeedViewController.swift */; };
 		383D08C0207E4B7E00625A33 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383D08BD207E4B7D00625A33 /* Helper.swift */; };
 		383D08C1207E4B7E00625A33 /* ImageTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383D08BE207E4B7E00625A33 /* ImageTextViewController.swift */; };
-		38644571213BAB0900F79F00 /* ViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38644570213BAB0900F79F00 /* ViewLayout.swift */; };
+		38644571213BAB0900F79F00 /* UIKitLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38644570213BAB0900F79F00 /* UIKitLayout.swift */; };
 		38CE112A214FF81800E886F5 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38CE1123214FF81800E886F5 /* Kingfisher.framework */; };
 		38CE112B214FF93A00E886F5 /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 38CE1123214FF81800E886F5 /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		38CE112C214FF99E00E886F5 /* Panda.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3806BA3D214FF63000D6981F /* Panda.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -166,7 +166,7 @@
 		383D08BC207E4B7D00625A33 /* WeiBoFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeiBoFeedViewController.swift; sourceTree = "<group>"; };
 		383D08BD207E4B7D00625A33 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		383D08BE207E4B7E00625A33 /* ImageTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTextViewController.swift; sourceTree = "<group>"; };
-		38644570213BAB0900F79F00 /* ViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLayout.swift; sourceTree = "<group>"; };
+		38644570213BAB0900F79F00 /* UIKitLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitLayout.swift; sourceTree = "<group>"; };
 		38B67C6C214564BA0093735D /* playground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = playground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		38CE1123214FF81800E886F5 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -365,7 +365,7 @@
 		38644564213BAAEE00F79F00 /* ViewExtension */ = {
 			isa = PBXGroup;
 			children = (
-				38644570213BAB0900F79F00 /* ViewLayout.swift */,
+				38644570213BAB0900F79F00 /* UIKitLayout.swift */,
 			);
 			path = ViewExtension;
 			sourceTree = "<group>";
@@ -538,7 +538,7 @@
 				383D08A1207E4B6300625A33 /* AutoLayoutCell.swift in Sources */,
 				381AEE3F21170BBB00F45C48 /* KingfishedNode.swift in Sources */,
 				383D08A5207E4B6300625A33 /* ImageTextView.swift in Sources */,
-				38644571213BAB0900F79F00 /* ViewLayout.swift in Sources */,
+				38644571213BAB0900F79F00 /* UIKitLayout.swift in Sources */,
 				3828B9BE2111543E0016BE62 /* NSObject+YYModel.m in Sources */,
 				383D08A2207E4B6300625A33 /* ImageTextCell.swift in Sources */,
 				383D08A6207E4B6300625A33 /* WeiBoCell.swift in Sources */,
@@ -631,7 +631,8 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Debug;
 		};

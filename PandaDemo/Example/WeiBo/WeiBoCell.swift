@@ -19,7 +19,7 @@ class WeiBoCell: UITableViewCell {
       super.awakeFromNib()
     print("newly alloc WBCell")
     contentView.addSubview(statusNode.view)
-    statusNode.width == UIScreen.main.bounds.width
+    statusNode.width == Double(UIScreen.main.bounds.width)
     statusNode.setNeedsLayout()
   }
   

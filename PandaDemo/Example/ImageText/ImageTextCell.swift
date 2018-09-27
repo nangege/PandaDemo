@@ -16,7 +16,7 @@ class ImageTextCell: UITableViewCell {
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
-    hotelRender.width == UIScreen.main.bounds.width
+    hotelRender.width == Double(UIScreen.main.bounds.width)
 
     contentView.addSubview(hotelRender.view)
   }

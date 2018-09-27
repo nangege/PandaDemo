@@ -335,7 +335,7 @@ class ToolBarNode: ViewNode{
     [topLine,bottomLine].forEach { (node) in
       node.backgroundColor = lineColor
       node.xSide == self
-      node.height == 1/UIScreen.main.scale
+      node.height == Double(1/UIScreen.main.scale)
     }
 
     topLine.top == top

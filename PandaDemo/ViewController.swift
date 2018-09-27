@@ -12,7 +12,8 @@ import Cassowary
 import Layoutable
 
 class ViewController: UIViewController {
-
+  @IBOutlet weak var container: UIView!
+  
   override func viewDidLoad() {
     super.viewDidLoad()
   }
@@ -28,12 +29,12 @@ class ViewController: UIViewController {
 
     for count in [5,10,20,30,40,50,60,70,100,200]{
       print("=========== \(count) ============")
+      testAutoLayout(count)
+      testViewLayout(count)
+      testNestAutoLayout(count)
       testNest(count)
       testNestView(count)
       testNodelayout(count)
-      testViewLayout(count)
-      testAutoLayout(count)
-      testNestAutoLayout(count)
     }
     
     let node = ViewNode()
@@ -114,8 +115,8 @@ class ViewController: UIViewController {
         var leftNode = node
         var rightNode = node
         if nodes.count != 0{
-          let left = Int(arc4random())%nodes.count
-          let right = Int(arc4random())%nodes.count
+          let left = Int(arc4random()/2)%nodes.count
+          let right = Int(arc4random()/2)%nodes.count
           leftNode = nodes[left]
           rightNode = nodes[right]
         }
@@ -129,8 +130,8 @@ class ViewController: UIViewController {
         newNode.top >= node.top + 20
         newNode.bottom <= node.bottom - 20
         
-        newNode.left == leftNode.left + CGFloat(arc4random()%20) ~ .strong
-        newNode.top == rightNode.top + CGFloat(arc4random()%20) ~ .strong
+        newNode.left == leftNode.left + Double(arc4random()%20) ~ .strong
+        newNode.top == rightNode.top + Double(arc4random()%20) ~ .strong
         
         nodes.append(newNode)
       }
@@ -139,6 +140,7 @@ class ViewController: UIViewController {
   }
   
   func testViewLayout(_ testNumber: Int = 100) {
+    container.clear()
     measureTime(desc:"testSystemPerformance ") {
       let node = UIView()
       var nodes = [UIView]()
@@ -147,8 +149,8 @@ class ViewController: UIViewController {
         var leftNode = node
         var rightNode = node
         if nodes.count != 0{
-          let left = Int(arc4random())%nodes.count
-          let right = Int(arc4random())%nodes.count
+          let left = Int(arc4random()/2)%nodes.count
+          let right = Int(arc4random()/2)%nodes.count
           leftNode = nodes[left]
           rightNode = nodes[right]
         }
@@ -162,28 +164,31 @@ class ViewController: UIViewController {
         newNode.top >= node.top + 20
         newNode.bottom <= node.bottom - 20
         
-        newNode.left == leftNode.left + CGFloat(arc4random()%20) ~ .strong
-        newNode.top == rightNode.top + CGFloat(arc4random()%20) ~ .strong
+        newNode.left == leftNode.left + Double(arc4random()%20) ~ .strong
+        newNode.top == rightNode.top + Double(arc4random()%20) ~ .strong
         
         nodes.append(newNode)
       }
       node.layoutIfEnabled()
+      container.addSubview(node)
     }
+    container.clear()
   }
   
   func testAutoLayout(_ testNumber: Int = 100) {
+    container.clear()
     measureTime(desc:"testAutolayoutPerformance ") {
-      let node = UIView()
+      let node = TestView()
       var nodes = [UIView]()
       node.widthAnchor.constraint(equalToConstant: 320).isActive = true
       node.heightAnchor.constraint(equalToConstant: 640).isActive = true
       node.translatesAutoresizingMaskIntoConstraints = false
       for _ in 0..<testNumber{
-        var leftNode = node
-        var rightNode = node
+        var leftNode: UIView = node
+        var rightNode: UIView = node
         if nodes.count != 0{
-          let left = Int(arc4random())%nodes.count
-          let right = Int(arc4random())%nodes.count
+          let left = Int(arc4random()/2)%nodes.count
+          let right = Int(arc4random()/2)%nodes.count
           leftNode = nodes[left]
           rightNode = nodes[right]
         }
@@ -208,8 +213,16 @@ class ViewController: UIViewController {
         
         nodes.append(newNode)
       }
+//      node.layoutIfNeeded()
+//      node.systemLayoutSizeFitting(container.frame.size)
+      container.addSubview(node)
+//      NSLayoutConstraint.activate([
+//      node.leftAnchor.constraint(equalTo: container.leftAnchor),
+//      node.topAnchor.constraint(equalTo: container.topAnchor)])
       node.layoutIfNeeded()
+      print(node)
     }
+    container.clear()
   }
   
   func testNestAutoLayout(_ testNumber: Int = 100) {
@@ -360,3 +373,16 @@ class ViewController: UIViewController {
 
 }
 
+
+extension UIView{
+  func clear(){
+    subviews.forEach{ $0.removeFromSuperview()}
+  }
+}
+
+class TestView: UIView{
+  override func layoutIfNeeded() {
+    super.layoutIfNeeded()
+    print("layoutIfNeeded")
+  }
+}

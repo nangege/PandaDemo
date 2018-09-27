@@ -44,7 +44,7 @@ class ImageTextView: UIView {
 
 extension UIView{
   func update(_ layout: LayoutValues){
-    frame = layout.frame
+    layoutRect = layout.frame
     for (index, view) in subviews.enumerated(){
       view.update(layout.subLayout[index])
     }

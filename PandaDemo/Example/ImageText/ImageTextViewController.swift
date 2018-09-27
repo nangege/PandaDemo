@@ -33,13 +33,13 @@ class ImageTextViewController: UIViewController {
   lazy var height: CGFloat = {
     hotelRender.update(hotels[0])
     hotelRender.layoutIfNeeded()
-    return hotelRender.layoutRect.height
+    return CGFloat(hotelRender.layoutRect.size.height)
   }()
   
   func heightFor(_ hotel: QHotel) -> CGFloat{
     hotelRender.update(hotel)
     hotelRender.layoutIfNeeded()
-    return hotelRender.layoutRect.height
+    return CGFloat(hotelRender.layoutRect.size.height)
   }
   
   lazy var hotels: [QHotel] = {
@@ -52,7 +52,7 @@ class ImageTextViewController: UIViewController {
     super.viewDidLoad()
     tableView.estimatedRowHeight = 0
     self.title = useAutolayout ? "UIKit" : "Cassowary"
-    hotelRender.width == UIScreen.main.bounds.width
+    hotelRender.width == Double(UIScreen.main.bounds.width)
     DispatchQueue.global().async {
       //self.updateCache()
       DispatchQueue.main.async(execute: {
@@ -128,7 +128,8 @@ extension ImageTextViewController: UITableViewDataSource,UITableViewDelegate{
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     if useAutolayout{
       heightCell.update(hotels[indexPath.row])
-      heightCell.layoutIfNeeded()
+//      heightCell.layoutIfNeeded()
+//      return heightCell.contentView.frame.height
       return heightCell.systemLayoutSizeFitting(CGSize(width: UIScreen.main.bounds.width, height: .infinity)).height
     }else{
       return heightFor(hotels[indexPath.row])

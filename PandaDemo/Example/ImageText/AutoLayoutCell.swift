@@ -26,14 +26,14 @@ class AutoLayoutCell: UITableViewCell {
     contentView.addSubview(addressLabel)
     contentView.addSubview(priceLabel)
     systemLayout()
-    //pandaLayout()
+//    pandaLayout()
   }
   
   func pandaLayout(){
     measureTime(desc: "Panda Layout init") {
       imageV.size == (120, 120)
       imageV.topLeft == contentView
-      contentView.width == UIScreen.main.bounds.width
+      contentView.width == Double(UIScreen.main.bounds.width)
       titleLabel.preferredMaxLayoutWidth = 210
       titleLabel.top == contentView.top + 10
       
@@ -44,6 +44,7 @@ class AutoLayoutCell: UITableViewCell {
       }
       
       [titleLabel,scoreLabel, addressLabel, priceLabel].space(10)
+      priceLabel.bottom ==  contentView.bottom - 40
       contentView.layoutIfEnabled()
     }
   }
@@ -117,10 +118,10 @@ class AutoLayoutCell: UITableViewCell {
       scoreLabel.text = hotel.score
       
       
-//      [titleLabel,addressLabel,priceLabel,scoreLabel].forEach{
-//        $0.manager.layoutNeedsUpdate = true
-//      }
-//      imageV.autolayout()
+      [contentView,titleLabel,addressLabel,priceLabel,scoreLabel].forEach{
+        $0.manager.layoutNeedsUpdate = true
+      }
+      contentView.layoutIfEnabled()
     }
   }
 

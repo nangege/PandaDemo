@@ -21,11 +21,11 @@ class WeiBoFeedViewController: UITableViewController {
       
       // optimize point. if use estimatedRowHeight, it will create a lot of new cell when tableView is load, which will slow down launch time
       tableView.estimatedRowHeight = 180
-      statusNode.width == UIScreen.main.bounds.width
+      statusNode.width == Double(UIScreen.main.bounds.width)
 //      statusNode.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 500)
     
       DispatchQueue.global().async {
-        for index in 0..<8{
+        for index in 0..<2{
           autoreleasepool {
             let data = try! Data(contentsOf: URL(fileURLWithPath:Bundle.main.path(forResource: "weibo_\(index)", ofType: "json")! ))
             let items = WBTimelineItem.model(withJSON: data)
@@ -50,6 +50,9 @@ class WeiBoFeedViewController: UITableViewController {
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "WeiBo",for: indexPath) as! WeiBoCell
     cell.statusNode.disableLayout()
+//    measureTime(desc: "cellForRowAt" ) {
+//      cell.update(for: statusViewModels[indexPath.row], needLayout: true)
+//    }
     cell.update(for: statusViewModels[indexPath.row], needLayout: false)
     cell.statusNode.apply(statusViewModels[indexPath.row].layoutValues!)
     return cell
@@ -77,7 +80,7 @@ class WeiBoFeedViewController: UITableViewController {
       viewModel.layoutValues = statusNode.layoutValues
     }
     
-    viewModel.height = statusNode.layoutRect.height
+    viewModel.height = CGFloat(statusNode.layoutRect.size.height)
 
     return viewModel.height
   }
