@@ -18,11 +18,8 @@ class WeiBoFeedViewController: UITableViewController {
     override func viewDidLoad() {
       super.viewDidLoad()
       tableView.separatorStyle = .none
-      
-      // optimize point. if use estimatedRowHeight, it will create a lot of new cell when tableView is load, which will slow down launch time
       tableView.estimatedRowHeight = 180
       statusNode.width == Double(UIScreen.main.bounds.width)
-//      statusNode.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 500)
     
       DispatchQueue.global().async {
         for index in 0..<2{

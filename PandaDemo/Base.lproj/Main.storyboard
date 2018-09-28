@@ -18,74 +18,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="rha-xC-Flc"/>
+                        <segue destination="il0-mA-c5B" kind="relationship" relationship="rootViewController" id="mow-cJ-LfH"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hyf-z1-6jQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-775" y="155"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="PandaDemo" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WET-0Q-vfJ">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="q8Q-RN-h9s">
-                                <rect key="frame" x="147" y="238.5" width="81" height="190"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SPd-AU-XUe">
-                                        <rect key="frame" x="0.0" y="0.0" width="81" height="30"/>
-                                        <state key="normal" title="ImageText"/>
-                                        <connections>
-                                            <action selector="caculate:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AFO-B8-W1h"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z8g-gV-d7Z">
-                                        <rect key="frame" x="0.0" y="80" width="81" height="30"/>
-                                        <state key="normal" title="Benchmark"/>
-                                        <connections>
-                                            <action selector="addHotelView:" destination="BYZ-38-t0r" eventType="touchUpInside" id="m2f-N1-PdK"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ozv-PC-vb9">
-                                        <rect key="frame" x="0.0" y="160" width="81" height="30"/>
-                                        <state key="normal" title="WeiBoNode"/>
-                                        <connections>
-                                            <segue destination="il0-mA-c5B" kind="show" id="NRX-SM-QJ0"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="WET-0Q-vfJ" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="B5l-7t-v27"/>
-                            <constraint firstItem="WET-0Q-vfJ" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="C7Q-ep-JY1"/>
-                            <constraint firstItem="q8Q-RN-h9s" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="LGQ-dJ-i7X"/>
-                            <constraint firstItem="q8Q-RN-h9s" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ZMo-MG-yEn"/>
-                            <constraint firstItem="WET-0Q-vfJ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="gaO-m1-aIW"/>
-                            <constraint firstItem="WET-0Q-vfJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="sQP-UH-ZtL"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="jMI-Al-TdG"/>
-                    <connections>
-                        <outlet property="container" destination="WET-0Q-vfJ" id="eMy-fw-2EN"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
         </scene>
         <!--Wei Bo Feed View Controller-->
         <scene sceneID="AEo-dJ-EN3">
@@ -110,10 +48,11 @@
                             <outlet property="delegate" destination="il0-mA-c5B" id="BFe-1X-Npa"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="8Lu-bj-0hi"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b51-0q-gvw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1361" y="34"/>
+            <point key="canvasLocation" x="198" y="154"/>
         </scene>
     </scenes>
 </document>

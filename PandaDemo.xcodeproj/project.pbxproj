@@ -32,20 +32,13 @@
 		3828B9C72111B3D20016BE62 /* WBStatusHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3828B9C52111B3D10016BE62 /* WBStatusHelper.m */; };
 		3828B9C9211299E10016BE62 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3828B9C8211299E00016BE62 /* UIColorExtension.swift */; };
 		383D083A207E4AC100625A33 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383D0839207E4AC100625A33 /* AppDelegate.swift */; };
-		383D083C207E4AC100625A33 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383D083B207E4AC100625A33 /* ViewController.swift */; };
 		383D083F207E4AC100625A33 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 383D083D207E4AC100625A33 /* Main.storyboard */; };
 		383D0841207E4AC200625A33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 383D0840207E4AC200625A33 /* Assets.xcassets */; };
 		383D0844207E4AC200625A33 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 383D0842207E4AC200625A33 /* LaunchScreen.storyboard */; };
-		383D08A1207E4B6300625A33 /* AutoLayoutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383D0876207E4B6300625A33 /* AutoLayoutCell.swift */; };
-		383D08A2207E4B6300625A33 /* ImageTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383D0877207E4B6300625A33 /* ImageTextCell.swift */; };
-		383D08A3207E4B6300625A33 /* PureFrameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383D0878207E4B6300625A33 /* PureFrameCell.swift */; };
-		383D08A4207E4B6300625A33 /* ImageTextNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383D0879207E4B6300625A33 /* ImageTextNode.swift */; };
-		383D08A5207E4B6300625A33 /* ImageTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383D087A207E4B6300625A33 /* ImageTextView.swift */; };
 		383D08A6207E4B6300625A33 /* WeiBoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383D087B207E4B6300625A33 /* WeiBoCell.swift */; };
 		383D08A7207E4B6300625A33 /* WeiBoNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383D087C207E4B6300625A33 /* WeiBoNode.swift */; };
 		383D08BF207E4B7E00625A33 /* WeiBoFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383D08BC207E4B7D00625A33 /* WeiBoFeedViewController.swift */; };
 		383D08C0207E4B7E00625A33 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383D08BD207E4B7D00625A33 /* Helper.swift */; };
-		383D08C1207E4B7E00625A33 /* ImageTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383D08BE207E4B7E00625A33 /* ImageTextViewController.swift */; };
 		38644571213BAB0900F79F00 /* UIKitLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38644570213BAB0900F79F00 /* UIKitLayout.swift */; };
 		38CE112A214FF81800E886F5 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38CE1123214FF81800E886F5 /* Kingfisher.framework */; };
 		38CE112B214FF93A00E886F5 /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 38CE1123214FF81800E886F5 /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -151,23 +144,15 @@
 		3828B9C8211299E00016BE62 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		383D0836207E4AC100625A33 /* PandaDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PandaDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		383D0839207E4AC100625A33 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		383D083B207E4AC100625A33 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		383D083E207E4AC100625A33 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		383D0840207E4AC200625A33 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		383D0843207E4AC200625A33 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		383D0845207E4AC200625A33 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		383D0876207E4B6300625A33 /* AutoLayoutCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoLayoutCell.swift; sourceTree = "<group>"; };
-		383D0877207E4B6300625A33 /* ImageTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTextCell.swift; sourceTree = "<group>"; };
-		383D0878207E4B6300625A33 /* PureFrameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PureFrameCell.swift; sourceTree = "<group>"; };
-		383D0879207E4B6300625A33 /* ImageTextNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTextNode.swift; sourceTree = "<group>"; };
-		383D087A207E4B6300625A33 /* ImageTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTextView.swift; sourceTree = "<group>"; };
 		383D087B207E4B6300625A33 /* WeiBoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeiBoCell.swift; sourceTree = "<group>"; };
 		383D087C207E4B6300625A33 /* WeiBoNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeiBoNode.swift; sourceTree = "<group>"; };
 		383D08BC207E4B7D00625A33 /* WeiBoFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeiBoFeedViewController.swift; sourceTree = "<group>"; };
 		383D08BD207E4B7D00625A33 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
-		383D08BE207E4B7E00625A33 /* ImageTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTextViewController.swift; sourceTree = "<group>"; };
 		38644570213BAB0900F79F00 /* UIKitLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitLayout.swift; sourceTree = "<group>"; };
-		38B67C6C214564BA0093735D /* playground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = playground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		38CE1123214FF81800E886F5 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -256,7 +241,6 @@
 		3828B9B4211152AA0016BE62 /* objc */ = {
 			isa = PBXGroup;
 			children = (
-				3828B9B9211154220016BE62 /* vender */,
 				3828B9B6211152C30016BE62 /* WBModel.h */,
 				3828B9B7211152C40016BE62 /* WBModel.m */,
 				3828B9B5211152C20016BE62 /* PandaDemo-Bridging-Header.h */,
@@ -311,9 +295,7 @@
 			isa = PBXGroup;
 			children = (
 				383D08C2207E4B9700625A33 /* Example */,
-				383D083B207E4AC100625A33 /* ViewController.swift */,
 				383D0839207E4AC100625A33 /* AppDelegate.swift */,
-				38B67C6C214564BA0093735D /* playground.playground */,
 				383D083D207E4AC100625A33 /* Main.storyboard */,
 				383D0840207E4AC200625A33 /* Assets.xcassets */,
 				383D0842207E4AC200625A33 /* LaunchScreen.storyboard */,
@@ -322,28 +304,14 @@
 			path = PandaDemo;
 			sourceTree = "<group>";
 		};
-		383D0875207E4B6300625A33 /* ImageText */ = {
-			isa = PBXGroup;
-			children = (
-				38644572213C2FCF00F79F00 /* APIDump */,
-				383D08BD207E4B7D00625A33 /* Helper.swift */,
-				383D08BE207E4B7E00625A33 /* ImageTextViewController.swift */,
-				383D0876207E4B6300625A33 /* AutoLayoutCell.swift */,
-				383D0877207E4B6300625A33 /* ImageTextCell.swift */,
-				383D0878207E4B6300625A33 /* PureFrameCell.swift */,
-				383D0879207E4B6300625A33 /* ImageTextNode.swift */,
-				383D087A207E4B6300625A33 /* ImageTextView.swift */,
-				381AEE3E21170BBB00F45C48 /* KingfishedNode.swift */,
-			);
-			path = ImageText;
-			sourceTree = "<group>";
-		};
 		383D08C2207E4B9700625A33 /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				383D08BD207E4B7D00625A33 /* Helper.swift */,
+				381AEE3E21170BBB00F45C48 /* KingfishedNode.swift */,
+				3828B9B9211154220016BE62 /* vender */,
 				38644564213BAAEE00F79F00 /* ViewExtension */,
 				383D08C3207E4CC100625A33 /* WeiBo */,
-				383D0875207E4B6300625A33 /* ImageText */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -351,9 +319,8 @@
 		383D08C3207E4CC100625A33 /* WeiBo */ = {
 			isa = PBXGroup;
 			children = (
+				38B03A7D215EEAC3000BE36C /* Resource */,
 				3828B9B4211152AA0016BE62 /* objc */,
-				3828B9A3211151E30016BE62 /* API Dump */,
-				3828B9A1211151BE0016BE62 /* ResourceWeibo.bundle */,
 				383D087B207E4B6300625A33 /* WeiBoCell.swift */,
 				383D087C207E4B6300625A33 /* WeiBoNode.swift */,
 				383D08BC207E4B7D00625A33 /* WeiBoFeedViewController.swift */,
@@ -370,11 +337,13 @@
 			path = ViewExtension;
 			sourceTree = "<group>";
 		};
-		38644572213C2FCF00F79F00 /* APIDump */ = {
+		38B03A7D215EEAC3000BE36C /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				3828B9A3211151E30016BE62 /* API Dump */,
+				3828B9A1211151BE0016BE62 /* ResourceWeibo.bundle */,
 			);
-			path = APIDump;
+			path = Resource;
 			sourceTree = "<group>";
 		};
 		38D19DDD211C4335002FC7E4 /* Frameworks */ = {
@@ -527,27 +496,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				3828B9A021100F080016BE62 /* WBModel.swift in Sources */,
-				383D08C1207E4B7E00625A33 /* ImageTextViewController.swift in Sources */,
 				381AEE4C2117EED700F45C48 /* Image+WebP.swift in Sources */,
 				3828B9C72111B3D20016BE62 /* WBStatusHelper.m in Sources */,
-				383D083C207E4AC100625A33 /* ViewController.swift in Sources */,
 				381AEE4B2117EED700F45C48 /* WebPProcessor.swift in Sources */,
 				383D08BF207E4B7E00625A33 /* WeiBoFeedViewController.swift in Sources */,
 				381AEE4A2117EED700F45C48 /* CGImage+WebP.m in Sources */,
 				3828B9C9211299E10016BE62 /* UIColorExtension.swift in Sources */,
-				383D08A1207E4B6300625A33 /* AutoLayoutCell.swift in Sources */,
 				381AEE3F21170BBB00F45C48 /* KingfishedNode.swift in Sources */,
-				383D08A5207E4B6300625A33 /* ImageTextView.swift in Sources */,
 				38644571213BAB0900F79F00 /* UIKitLayout.swift in Sources */,
 				3828B9BE2111543E0016BE62 /* NSObject+YYModel.m in Sources */,
-				383D08A2207E4B6300625A33 /* ImageTextCell.swift in Sources */,
 				383D08A6207E4B6300625A33 /* WeiBoCell.swift in Sources */,
 				383D08A7207E4B6300625A33 /* WeiBoNode.swift in Sources */,
 				383D08C0207E4B7E00625A33 /* Helper.swift in Sources */,
 				3828B9B8211152C40016BE62 /* WBModel.m in Sources */,
 				3828B9BF2111543E0016BE62 /* YYClassInfo.m in Sources */,
-				383D08A4207E4B6300625A33 /* ImageTextNode.swift in Sources */,
-				383D08A3207E4B6300625A33 /* PureFrameCell.swift in Sources */,
 				383D083A207E4AC100625A33 /* AppDelegate.swift in Sources */,
 				381AEE492117EED700F45C48 /* WebPSerializer.swift in Sources */,
 			);
