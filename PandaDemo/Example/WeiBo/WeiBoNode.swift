@@ -21,12 +21,13 @@ class WBStatusCardNode: ViewNode{
   override init() {
     super.init()
     backgroundColor = UIColor(hex6: 0xf7f7f7)
-    addSubnodes([imageNode, textNode, badgeNode,buttonNode])
+    addSubnodes([imageNode,
+                 textNode,
+                 badgeNode,
+                 buttonNode])
     
-    imageNode.topLeft == self
+    [self,imageNode,badgeNode].equal(.left,.top)
     imageNode.size == (70, 70)
-    
-    badgeNode.topLeft == self
     badgeNode.size == (25, 25)
     
     textNode.left == imageNode.right + 10
@@ -49,9 +50,9 @@ class StatusNode: ViewNode{
   var imageViews = [ImageNode]()
   var imageContainer = FlowLayoutNode()
   
-  var cardHeightConstraint: LayoutConstraint?
-  var retTop: LayoutConstraint?
-  var retBottom:LayoutConstraint?
+  var cardHeightConstraint: LayoutConstraint!
+  var retTop: LayoutConstraint!
+  var retBottom:LayoutConstraint!
   
   override init() {
     super.init()
@@ -197,11 +198,11 @@ class StatusNode: ViewNode{
     
     if needLayout{
       if let retweet = status.retweetAttributeText ,retweet.length > 0{
-        retTop?.constant = 5
-        retBottom?.constant = -5
+        retTop.constant = 5
+        retBottom.constant = -5
       }else{
-        retTop?.constant = 0
-        retBottom?.constant = 0
+        retTop.constant = 0
+        retBottom.constant = 0
       }
       imageContainer.invalidateIntrinsicContentSize()
       cardHeightConstraint?.constant = cardNode.hidden ? 0 : 70
