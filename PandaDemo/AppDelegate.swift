@@ -21,7 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Override point for customization after application launch.
     KingfisherManager.shared.defaultOptions = [.processor(WebPProcessor.default), .cacheSerializer(WebPSerializer.default)]
 //    KingfisherManager.shared.cache.maxMemoryCost = 100 * 102
-    
     return true
   }
 

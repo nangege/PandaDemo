@@ -8,17 +8,6 @@
 
 import Foundation
 
-func randomText() -> String{
-  let count = arc4random()%16
-  let text = "abcdefghijklmnopqrstuvwxyz"
-  var result = "😆😆哈哈"
-  for i in 0..<count{
-    let index = text.index(text.startIndex, offsetBy: Int(i))
-    result += text[index].description
-  }
-  return result
-}
-
 @discardableResult func measureTime(desc: String? = nil,action:()->()) -> Double{
   let renderStart = CFAbsoluteTimeGetCurrent()
   action()

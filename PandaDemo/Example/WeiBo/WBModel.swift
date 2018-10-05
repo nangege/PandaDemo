@@ -32,7 +32,8 @@ struct WBImageResource: Resource {
 class WBStatusViewModel{
   
   var name: String = ""
-  var titleAttributeText: NSAttributedString? = nil
+  var title: String? = nil
+  var textAttributeText: NSAttributedString? = nil
   var retweetAttributeText: NSAttributedString? = nil
   var sourceAttributeText: NSAttributedString = NSAttributedString(string: "")
   var avatarImageUrl: URL? = nil
@@ -48,8 +49,12 @@ class WBStatusViewModel{
 
     name = nameFor(status: status)
     
+    if let title = status.title?.text{
+      self.title = title
+    }
+    
     let attributeTitle = WBStatusHelper.text(with: status, isRetweet: false, fontSize: 17, textColor: UIColor(hex6: 0x333333))
-    titleAttributeText = attributeTitle
+    textAttributeText = attributeTitle
     
     var pics: [WBPicture]? = nil
     if let retweeted = status.retweeted{

@@ -12,15 +12,12 @@ import Layoutable
 
 class WeiBoCell: UITableViewCell {
 
-
   let statusNode = StatusNode()
   
   override func awakeFromNib() {
-      super.awakeFromNib()
-    print("newly alloc WBCell")
+    super.awakeFromNib()
     contentView.addSubview(statusNode.view)
     statusNode.width == Double(UIScreen.main.bounds.width)
-    statusNode.setNeedsLayout()
   }
   
   func update(for status: WBStatusViewModel, needLayout: Bool = true){
