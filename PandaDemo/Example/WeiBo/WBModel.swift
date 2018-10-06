@@ -47,7 +47,7 @@ class WBStatusViewModel{
   
   init(status: WBStatus) {
 
-    name = nameFor(status: status)
+    name = nameFor(status)
     
     if let title = status.title?.text{
       self.title = title
@@ -100,7 +100,7 @@ class WBStatusViewModel{
     }
   }
   
-  func nameFor(status: WBStatus) -> String{
+  func nameFor(_ status: WBStatus) -> String{
     var name = status.user!.remark
     if name == nil || name!.count == 0{
       name = status.user!.screenName
@@ -129,7 +129,36 @@ class WBStatusViewModel{
         [.font: UIFont.systemFont(ofSize: 12),
          .foregroundColor: UIColor.init(hex6: 0x333333)])
       attributePage.append(attributeDesc)
+    }else if let content = pageInfo.content2{
+      attributePage.append(NSAttributedString(string: "\n"))
+      let attributeDesc = NSMutableAttributedString(string: content,
+                                                    attributes:
+        [.font: UIFont.systemFont(ofSize: 12),
+         .foregroundColor: UIColor.init(hex6: 0x333333)])
+      attributePage.append(attributeDesc)
+    } else if let content = pageInfo.content3 {
+      attributePage.append(NSAttributedString(string: "\n"))
+      let attributeDesc = NSMutableAttributedString(string: content,
+                                                    attributes:
+        [.font: UIFont.systemFont(ofSize: 12),
+         .foregroundColor: UIColor.init(hex6: 0x333333)])
+      attributePage.append(attributeDesc)
     }
+    
+    if let tips = pageInfo.tips {
+      attributePage.append(NSAttributedString(string: "\n"))
+      let attributeDesc = NSMutableAttributedString(string: tips,
+                                                    attributes:
+        [.font: UIFont.systemFont(ofSize: 12),
+         .foregroundColor: UIColor.init(hex6: 0x333333)])
+      attributePage.append(attributeDesc)
+    }
+    let paraStyle = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
+    paraStyle.lineBreakMode = .byTruncatingTail
+    paraStyle.maximumLineHeight = 20
+    paraStyle.minimumLineHeight = 20
+    attributePage.addAttribute(.paragraphStyle, value: paraStyle, range: NSRange(location: 0, length: attributePage.length))
+    
     cardText = attributePage
   }
 }

@@ -17,6 +17,7 @@ class StatusNode: ViewNode{
   let vipBackground = ImageNode()
   let topBackground = ViewNode()
   let bottomBackground = ViewNode()
+  
   let menuButton: ButtonNode = {
     let button = ButtonNode()
     button.setImage(UIImage(named: "timeline_icon_more"), for: .normal)
@@ -41,9 +42,7 @@ class StatusNode: ViewNode{
   let retweetTextNode = TextNode()
   let cardNode = CardNode()
 
-  var cardHeightConstraint: LayoutConstraint!
-  var retTop: LayoutConstraint!
-  var retBottom:LayoutConstraint!
+  var retYAxisConstraint: [LayoutConstraint]!
   
   override init() {
     super.init()
@@ -55,22 +54,18 @@ class StatusNode: ViewNode{
     let bgColor = UIColor(white: 0, alpha: 0.08)
     topBackground.backgroundColor = bgColor
     bottomBackground.backgroundColor = bgColor
+    
     textNode.numberOfLines = -1
     textNode.userInteractionEnabled = true
+    
     vipBackground.contentMode = .scaleAspectToFit
     
-    addSubnode(topBackground)
-    addSubnode(bottomBackground)
-    addSubnode(titleNode)
-    addSubnode(profileNode)
-    addSubnode(vipBackground)
-    addSubnode(toolBarNode)
-    addSubnode(menuButton)
+    retweetTextNode.numberOfLines = -1
+    retweetBackground.backgroundColor = UIColor(hex6: 0xf7f7f7)
     
-    addSubnode(textNode)
-    addSubnode(retweetBackground)
-    addSubnode(imageContainer)
-    addSubnode(cardNode)
+    addSubnodes([topBackground,titleNode,profileNode,vipBackground,
+                 menuButton,textNode,retweetBackground,imageContainer,
+                 cardNode,toolBarNode,bottomBackground])
     
     retweetBackground.addSubnode(retweetTextNode)
     imageContainer.addSubnodes(imageViews)
@@ -84,15 +79,17 @@ class StatusNode: ViewNode{
     
     [self,topBackground].equal(.left,.right,.top)
     topBackground.height == topInset
+    
     [titleNode,vipBackground].forEach{ $0.top == top + topInset}
     [self,titleNode,vipBackground].equal(.left,.right)
+    
     profileNode.xSide == self
     profileNode.top == titleNode.bottom
     
     vipBackground.height == 14
     
     textNode.xSide == xSide.insets(sideInset)
-    textNode.top == profileNode.bottom + 10
+    textNode.top == profileNode.bottom
     
     menuButton.size == (30,30)
     menuButton.topRight == topRight.offset((3, -5))
@@ -101,18 +98,13 @@ class StatusNode: ViewNode{
     retweetBackground.top == textNode.bottom + 10
     
     retweetTextNode.xSide == retweetBackground
-    let topBottomConstraint = retweetTextNode.ySide == retweetBackground + 5
-    retTop = topBottomConstraint[0]
-    retBottom = topBottomConstraint[1]
-    retweetTextNode.numberOfLines = -1
-    retweetBackground.backgroundColor = UIColor(hex6: 0xf7f7f7)
+    retYAxisConstraint = retweetTextNode.ySide == retweetBackground + 5
     
     imageContainer.xSide == self + sideInset
     imageContainer.top == retweetBackground.bottom
     
-    cardNode.xSide == self + sideInset
+    cardNode.xSide == xSide.insets(sideInset)
     cardNode.top == imageContainer.bottom
-    cardHeightConstraint = cardNode.height == 70
     
     toolBarNode.top == cardNode.bottom + 10
     toolBarNode.bottom == bottom - bottomInset
@@ -124,22 +116,10 @@ class StatusNode: ViewNode{
   
   func update(_ status: WBStatusViewModel, needLayout: Bool = true){
     
-    profileNode.nameNode.text = status.name
-    
+    titleNode.title = status.title
     textNode.attributeText = status.textAttributeText
     retweetTextNode.attributeText = status.retweetAttributeText
-    profileNode.sourceNode.attributeText = status.sourceAttributeText
-    
-    titleNode.title = status.title
-    
-    if let image = status.avatarBadge{
-      profileNode.badgeNode.image = image
-      profileNode.badgeNode.hidden = false
-    }else{
-      profileNode.badgeNode.hidden = true
-    }
-
-    profileNode.avatarNode.kf.setImage(with: ImageResource(downloadURL: status.avatarImageUrl!))
+    profileNode.updateFor(status)
     
     var showCard = true
     
@@ -210,14 +190,13 @@ class StatusNode: ViewNode{
     
     if needLayout{
       if let retweet = status.retweetAttributeText ,retweet.length > 0{
-        retTop.constant = 5
-        retBottom.constant = -5
+        retYAxisConstraint[0].constant = 5
+        retYAxisConstraint[1].constant = -5
       }else{
-        retTop.constant = 0
-        retBottom.constant = 0
+        retYAxisConstraint[0].constant = 0
+        retYAxisConstraint[1].constant = 0
       }
       imageContainer.invalidateIntrinsicContentSize()
-      cardHeightConstraint?.constant = cardNode.hidden ? 0 : 70
     }
   }
 }
@@ -236,7 +215,6 @@ class TitleNode: ViewNode{
     node.backgroundColor = UIColor(hex6: 0xe8e8e8)
     return node
   }()
-  
   
   var title: String?{
     didSet{
@@ -257,11 +235,11 @@ class TitleNode: ViewNode{
     titleLine.height == Double(1/UIScreen.main.scale)
   }
   
-  override func contentSizeFor(maxWidth: Double) -> Size {
+  override var itemIntrinsicContentSize: Size{
     if title != nil{
-      return (maxWidth,38)
+      return (InvalidIntrinsicMetric,38)
     }else{
-      return (maxWidth,0)
+      return (InvalidIntrinsicMetric,0)
     }
   }
 }
@@ -304,11 +282,25 @@ class ProfileNode: ViewNode{
     nameNode.left == avatarNode.right + 14
     nameNode.right <= right
     
-    sourceNode.topLeft == nameNode.bottomLeft + (10,0)
+    sourceNode.topLeft == nameNode.bottomLeft + (4,0)
     sourceNode.bottom == bottom - 10
     
     arrowNode.right == right - 20
     arrowNode.top == 10
+  }
+  
+  func updateFor(_ status: WBStatusViewModel){
+    nameNode.text = status.name
+    sourceNode.attributeText = status.sourceAttributeText
+    
+    if let image = status.avatarBadge{
+      badgeNode.image = image
+      badgeNode.hidden = false
+    }else{
+      badgeNode.hidden = true
+    }
+    
+    avatarNode.kf.setImage(with: ImageResource(downloadURL: status.avatarImageUrl!))
   }
   
 }
@@ -323,6 +315,8 @@ class CardNode: ViewNode{
   override init() {
     super.init()
     backgroundColor = UIColor(hex6: 0xf7f7f7)
+    textNode.numberOfLines = 3
+    
     addSubnodes([imageNode,
                  textNode,
                  badgeNode,
@@ -335,6 +329,20 @@ class CardNode: ViewNode{
     textNode.left == imageNode.right + 10
     textNode.centerY == imageNode.centerY
     textNode.right <= right - 10
+  }
+  
+  override var hidden: Bool{
+    didSet{
+        invalidateIntrinsicContentSize()
+    }
+  }
+  
+  override var itemIntrinsicContentSize: Size{
+    if hidden{
+      return (InvalidIntrinsicMetric,0)
+    }else{
+      return (InvalidIntrinsicMetric,70)
+    }
   }
 }
 

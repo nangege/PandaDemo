@@ -22,7 +22,7 @@ class WeiBoFeedViewController: UITableViewController {
       statusNode.width == Double(UIScreen.main.bounds.width)
     
       DispatchQueue.global().async {
-        for index in 0..<2{
+        for index in 0..<8{
           autoreleasepool {
             let data = try! Data(contentsOf: URL(fileURLWithPath:Bundle.main.path(forResource: "weibo_\(index)", ofType: "json")! ))
             let items = WBTimelineItem.model(withJSON: data)
