@@ -31,10 +31,10 @@ class WeiBoFeedViewController: UITableViewController {
           }
         }
         for status in self.statusViewModels{
-//          self.statusNode.update(status)
-//          self.statusNode.layoutIfNeeded()
-//          status.layoutValues = self.statusNode.layoutValues
-//          status.height = self.statusNode.frame.height
+          self.statusNode.update(status)
+          self.statusNode.layoutIfNeeded()
+          status.layoutValues = self.statusNode.layoutValues
+          status.height = self.statusNode.frame.height
         }
         
         DispatchQueue.main.async {
@@ -46,12 +46,12 @@ class WeiBoFeedViewController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "WeiBo",for: indexPath) as! WeiBoCell
-//    cell.statusNode.disableLayout()
+    cell.statusNode.disableLayout()
 //    measureTime(desc: "cellForRowAt" ) {
-      cell.update(for: statusViewModels[indexPath.row], needLayout: true)
+//      cell.update(for: statusViewModels[indexPath.row])
 //    }
-//    cell.update(for: statusViewModels[indexPath.row], needLayout: false)
-//    cell.statusNode.apply(statusViewModels[indexPath.row].layoutValues!)
+    cell.update(for: statusViewModels[indexPath.row], needLayout: false)
+    cell.statusNode.apply(statusViewModels[indexPath.row].layoutValues!)
     return cell
   }
   
@@ -71,7 +71,7 @@ class WeiBoFeedViewController: UITableViewController {
       return viewModel.height
     }
   
-    let time = measureTime(desc: "heightForRow:") {
+    measureTime(desc: "heightForRow:") {
       statusNode.update(viewModel)
       statusNode.layoutIfNeeded()
       viewModel.layoutValues = statusNode.layoutValues
