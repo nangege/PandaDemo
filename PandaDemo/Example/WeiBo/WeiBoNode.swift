@@ -73,9 +73,9 @@ class StatusNode: ViewNode{
   
   func layout(){
     
-    let sideInset = 10.0
-    let topInset = 8.0
-    let bottomInset = 2.0
+    let sideInset: CGFloat = 10.0
+    let topInset: CGFloat = 8.0
+    let bottomInset: CGFloat = 2.0
     
     [self,topBackground].equal(.left,.right,.top)
     topBackground.height == topInset
@@ -232,14 +232,14 @@ class TitleNode: ViewNode{
     titleNode.centerY == centerY
     
     [self,titleLine].equal(.left,.right,.bottom)
-    titleLine.height == Double(1/UIScreen.main.scale)
+    titleLine.height == 1/UIScreen.main.scale
   }
   
-  override var itemIntrinsicContentSize: Size{
+  override var itemIntrinsicContentSize: CGSize{
     if title != nil{
-      return (InvalidIntrinsicMetric,38)
+      return CGSize(width: InvalidIntrinsicMetric,height: 38)
     }else{
-      return (InvalidIntrinsicMetric,0)
+      return CGSize(width: InvalidIntrinsicMetric,height: 0)
     }
   }
 }
@@ -337,11 +337,11 @@ class CardNode: ViewNode{
     }
   }
   
-  override var itemIntrinsicContentSize: Size{
+  override var itemIntrinsicContentSize: CGSize{
     if hidden{
-      return (InvalidIntrinsicMetric,0)
+      return CGSize(width: InvalidIntrinsicMetric,height: 0.0)
     }else{
-      return (InvalidIntrinsicMetric,70)
+      return CGSize(width: InvalidIntrinsicMetric,height: 70.0)
     }
   }
 }
@@ -427,7 +427,7 @@ class ToolBarNode: ViewNode{
     [topLine,bottomLine].forEach { (node) in
       node.backgroundColor = lineColor
       node.xSide == self
-      node.height == Double(1/UIScreen.main.scale)
+      node.height == 1/UIScreen.main.scale
     }
 
     topLine.top == top

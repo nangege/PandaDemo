@@ -17,7 +17,7 @@ class WeiBoCell: UITableViewCell {
   override func awakeFromNib() {
     super.awakeFromNib()
     contentView.addSubview(statusNode.view)
-    statusNode.width == Double(UIScreen.main.bounds.width)
+    statusNode.width == UIScreen.main.bounds.width
   }
   
   func update(for status: WBStatusViewModel, needLayout: Bool = true){

@@ -26,7 +26,7 @@ class RichTextNode: TextNode{
     }
   }
   
-  override func contentSizeFor(maxWidth: Double) -> Size {
+  override func contentSizeFor(maxWidth: CGFloat) -> CGSize {
     return super.contentSizeFor(maxWidth: maxWidth)
   }
 }
