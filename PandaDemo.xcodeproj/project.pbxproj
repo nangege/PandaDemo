@@ -11,11 +11,6 @@
 		3806BA41214FF65900D6981F /* Layoutable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3806BA2B214FF62200D6981F /* Layoutable.framework */; };
 		3806BA42214FF65900D6981F /* Panda.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3806BA3D214FF63000D6981F /* Panda.framework */; };
 		381AEE3F21170BBB00F45C48 /* KingfishedNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381AEE3E21170BBB00F45C48 /* KingfishedNode.swift */; };
-		381AEE492117EED700F45C48 /* WebPSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381AEE432117EED700F45C48 /* WebPSerializer.swift */; };
-		381AEE4A2117EED700F45C48 /* CGImage+WebP.m in Sources */ = {isa = PBXBuildFile; fileRef = 381AEE442117EED700F45C48 /* CGImage+WebP.m */; };
-		381AEE4B2117EED700F45C48 /* WebPProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381AEE452117EED700F45C48 /* WebPProcessor.swift */; };
-		381AEE4C2117EED700F45C48 /* Image+WebP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381AEE462117EED700F45C48 /* Image+WebP.swift */; };
-		381AEE4E2117EFAA00F45C48 /* WebP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 381AEE4D2117EFAA00F45C48 /* WebP.framework */; };
 		3828B9A021100F080016BE62 /* WBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3828B99F21100F080016BE62 /* WBModel.swift */; };
 		3828B9A2211151BE0016BE62 /* ResourceWeibo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3828B9A1211151BE0016BE62 /* ResourceWeibo.bundle */; };
 		3828B9AC211152070016BE62 /* weibo_7.json in Resources */ = {isa = PBXBuildFile; fileRef = 3828B9A4211152070016BE62 /* weibo_7.json */; };
@@ -40,6 +35,11 @@
 		383D08BF207E4B7E00625A33 /* WeiBoFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383D08BC207E4B7D00625A33 /* WeiBoFeedViewController.swift */; };
 		383D08C0207E4B7E00625A33 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383D08BD207E4B7D00625A33 /* Helper.swift */; };
 		389A19ED21672FD100F98AE0 /* RichTextNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389A19EC21672FD100F98AE0 /* RichTextNode.swift */; };
+		389A1A20216A348600F98AE0 /* WebP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 389A1A12216A348600F98AE0 /* WebP.framework */; };
+		389A1A21216A348600F98AE0 /* WebPSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389A1A14216A348600F98AE0 /* WebPSerializer.swift */; };
+		389A1A22216A348600F98AE0 /* CGImage+WebP.m in Sources */ = {isa = PBXBuildFile; fileRef = 389A1A15216A348600F98AE0 /* CGImage+WebP.m */; };
+		389A1A23216A348600F98AE0 /* WebPProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389A1A16216A348600F98AE0 /* WebPProcessor.swift */; };
+		389A1A24216A348600F98AE0 /* Image+WebP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389A1A17216A348600F98AE0 /* Image+WebP.swift */; };
 		38CE112A214FF81800E886F5 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38CE1123214FF81800E886F5 /* Kingfisher.framework */; };
 		38CE112B214FF93A00E886F5 /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 38CE1123214FF81800E886F5 /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		38CE112C214FF99E00E886F5 /* Panda.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3806BA3D214FF63000D6981F /* Panda.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -114,14 +114,6 @@
 		3806BA2E214FF62900D6981F /* Cassowary.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Cassowary.xcodeproj; path = Cassowary/Cassowary.xcodeproj; sourceTree = "<group>"; };
 		3806BA37214FF62F00D6981F /* Panda.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Panda.xcodeproj; path = Panda/Panda.xcodeproj; sourceTree = "<group>"; };
 		381AEE3E21170BBB00F45C48 /* KingfishedNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KingfishedNode.swift; sourceTree = "<group>"; };
-		381AEE422117EED700F45C48 /* KingfisherWebP-umbrella.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KingfisherWebP-umbrella.h"; sourceTree = "<group>"; };
-		381AEE432117EED700F45C48 /* WebPSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebPSerializer.swift; sourceTree = "<group>"; };
-		381AEE442117EED700F45C48 /* CGImage+WebP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CGImage+WebP.m"; sourceTree = "<group>"; };
-		381AEE452117EED700F45C48 /* WebPProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebPProcessor.swift; sourceTree = "<group>"; };
-		381AEE462117EED700F45C48 /* Image+WebP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Image+WebP.swift"; sourceTree = "<group>"; };
-		381AEE472117EED700F45C48 /* CGImage+WebP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CGImage+WebP.h"; sourceTree = "<group>"; };
-		381AEE482117EED700F45C48 /* KingfisherWebP.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = KingfisherWebP.modulemap; sourceTree = "<group>"; };
-		381AEE4D2117EFAA00F45C48 /* WebP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WebP.framework; sourceTree = "<group>"; };
 		3828B99F21100F080016BE62 /* WBModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WBModel.swift; sourceTree = "<group>"; };
 		3828B9A1211151BE0016BE62 /* ResourceWeibo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ResourceWeibo.bundle; sourceTree = "<group>"; };
 		3828B9A4211152070016BE62 /* weibo_7.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = weibo_7.json; sourceTree = "<group>"; };
@@ -153,6 +145,14 @@
 		383D08BC207E4B7D00625A33 /* WeiBoFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeiBoFeedViewController.swift; sourceTree = "<group>"; };
 		383D08BD207E4B7D00625A33 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		389A19EC21672FD100F98AE0 /* RichTextNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RichTextNode.swift; sourceTree = "<group>"; };
+		389A1A12216A348600F98AE0 /* WebP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WebP.framework; sourceTree = "<group>"; };
+		389A1A13216A348600F98AE0 /* KingfisherWebP-umbrella.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KingfisherWebP-umbrella.h"; sourceTree = "<group>"; };
+		389A1A14216A348600F98AE0 /* WebPSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebPSerializer.swift; sourceTree = "<group>"; };
+		389A1A15216A348600F98AE0 /* CGImage+WebP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CGImage+WebP.m"; sourceTree = "<group>"; };
+		389A1A16216A348600F98AE0 /* WebPProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebPProcessor.swift; sourceTree = "<group>"; };
+		389A1A17216A348600F98AE0 /* Image+WebP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Image+WebP.swift"; sourceTree = "<group>"; };
+		389A1A18216A348600F98AE0 /* CGImage+WebP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CGImage+WebP.h"; sourceTree = "<group>"; };
+		389A1A19216A348600F98AE0 /* KingfisherWebP.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = KingfisherWebP.modulemap; sourceTree = "<group>"; };
 		38CE1123214FF81800E886F5 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -161,11 +161,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				389A1A20216A348600F98AE0 /* WebP.framework in Frameworks */,
 				38CE112A214FF81800E886F5 /* Kingfisher.framework in Frameworks */,
 				3806BA40214FF65900D6981F /* Cassowary.framework in Frameworks */,
 				3806BA41214FF65900D6981F /* Layoutable.framework in Frameworks */,
 				3806BA42214FF65900D6981F /* Panda.framework in Frameworks */,
-				381AEE4E2117EFAA00F45C48 /* WebP.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,30 +199,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		381AEE402117EED700F45C48 /* KingfisherWebP */ = {
-			isa = PBXGroup;
-			children = (
-				381AEE412117EED700F45C48 /* Classes */,
-				381AEE482117EED700F45C48 /* KingfisherWebP.modulemap */,
-			);
-			name = KingfisherWebP;
-			path = Carthage/Checkouts/KingfisherWebP/KingfisherWebP;
-			sourceTree = SOURCE_ROOT;
-		};
-		381AEE412117EED700F45C48 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				381AEE4D2117EFAA00F45C48 /* WebP.framework */,
-				381AEE422117EED700F45C48 /* KingfisherWebP-umbrella.h */,
-				381AEE432117EED700F45C48 /* WebPSerializer.swift */,
-				381AEE442117EED700F45C48 /* CGImage+WebP.m */,
-				381AEE452117EED700F45C48 /* WebPProcessor.swift */,
-				381AEE462117EED700F45C48 /* Image+WebP.swift */,
-				381AEE472117EED700F45C48 /* CGImage+WebP.h */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
 		3828B9A3211151E30016BE62 /* API Dump */ = {
 			isa = PBXGroup;
 			children = (
@@ -251,7 +227,7 @@
 		3828B9B9211154220016BE62 /* vender */ = {
 			isa = PBXGroup;
 			children = (
-				381AEE402117EED700F45C48 /* KingfisherWebP */,
+				389A1A10216A348600F98AE0 /* KingfisherWebP */,
 				3828B9C8211299E00016BE62 /* UIColorExtension.swift */,
 				3828B9C1211197360016BE62 /* Tools */,
 				3828B9BB2111543E0016BE62 /* NSObject+YYModel.h */,
@@ -327,6 +303,29 @@
 				3828B99F21100F080016BE62 /* WBModel.swift */,
 			);
 			path = WeiBo;
+			sourceTree = "<group>";
+		};
+		389A1A10216A348600F98AE0 /* KingfisherWebP */ = {
+			isa = PBXGroup;
+			children = (
+				389A1A11216A348600F98AE0 /* Classes */,
+				389A1A19216A348600F98AE0 /* KingfisherWebP.modulemap */,
+			);
+			path = KingfisherWebP;
+			sourceTree = "<group>";
+		};
+		389A1A11216A348600F98AE0 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				389A1A12216A348600F98AE0 /* WebP.framework */,
+				389A1A13216A348600F98AE0 /* KingfisherWebP-umbrella.h */,
+				389A1A14216A348600F98AE0 /* WebPSerializer.swift */,
+				389A1A15216A348600F98AE0 /* CGImage+WebP.m */,
+				389A1A16216A348600F98AE0 /* WebPProcessor.swift */,
+				389A1A17216A348600F98AE0 /* Image+WebP.swift */,
+				389A1A18216A348600F98AE0 /* CGImage+WebP.h */,
+			);
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		38B03A7D215EEAC3000BE36C /* Resource */ = {
@@ -488,22 +487,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				3828B9A021100F080016BE62 /* WBModel.swift in Sources */,
-				381AEE4C2117EED700F45C48 /* Image+WebP.swift in Sources */,
 				3828B9C72111B3D20016BE62 /* WBStatusHelper.m in Sources */,
-				381AEE4B2117EED700F45C48 /* WebPProcessor.swift in Sources */,
+				389A1A22216A348600F98AE0 /* CGImage+WebP.m in Sources */,
 				383D08BF207E4B7E00625A33 /* WeiBoFeedViewController.swift in Sources */,
-				381AEE4A2117EED700F45C48 /* CGImage+WebP.m in Sources */,
+				389A1A21216A348600F98AE0 /* WebPSerializer.swift in Sources */,
+				389A1A23216A348600F98AE0 /* WebPProcessor.swift in Sources */,
 				3828B9C9211299E10016BE62 /* UIColorExtension.swift in Sources */,
 				389A19ED21672FD100F98AE0 /* RichTextNode.swift in Sources */,
 				381AEE3F21170BBB00F45C48 /* KingfishedNode.swift in Sources */,
 				3828B9BE2111543E0016BE62 /* NSObject+YYModel.m in Sources */,
 				383D08A6207E4B6300625A33 /* WeiBoCell.swift in Sources */,
 				383D08A7207E4B6300625A33 /* WeiBoNode.swift in Sources */,
+				389A1A24216A348600F98AE0 /* Image+WebP.swift in Sources */,
 				383D08C0207E4B7E00625A33 /* Helper.swift in Sources */,
 				3828B9B8211152C40016BE62 /* WBModel.m in Sources */,
 				3828B9BF2111543E0016BE62 /* YYClassInfo.m in Sources */,
 				383D083A207E4AC100625A33 /* AppDelegate.swift in Sources */,
-				381AEE492117EED700F45C48 /* WebPSerializer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -656,6 +655,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)/Carthage/Checkouts/KingfisherWebP/KingfisherWebP/Classes",
+					"$(PROJECT_DIR)/PandaDemo/Example/vender/KingfisherWebP/Classes",
 				);
 				INFOPLIST_FILE = PandaDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -683,6 +683,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)/Carthage/Checkouts/KingfisherWebP/KingfisherWebP/Classes",
+					"$(PROJECT_DIR)/PandaDemo/Example/vender/KingfisherWebP/Classes",
 				);
 				INFOPLIST_FILE = PandaDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

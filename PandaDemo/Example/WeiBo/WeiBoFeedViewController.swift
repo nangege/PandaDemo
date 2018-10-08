@@ -22,7 +22,7 @@ class WeiBoFeedViewController: UITableViewController {
       statusNode.width == UIScreen.main.bounds.width
     
       DispatchQueue.global().async {
-        for index in 0..<8{
+        for index in 0..<2{
           autoreleasepool {
             let data = try! Data(contentsOf: URL(fileURLWithPath:Bundle.main.path(forResource: "weibo_\(index)", ofType: "json")! ))
             let items = WBTimelineItem.model(withJSON: data)
@@ -46,12 +46,12 @@ class WeiBoFeedViewController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "WeiBo",for: indexPath) as! WeiBoCell
-//    cell.statusNode.disableLayout()
-    measureTime(desc: "cellForRowAt" ) {
-      cell.update(for: statusViewModels[indexPath.row])
-    }
-//    cell.update(for: statusViewModels[indexPath.row], needLayout: false)
-//    cell.statusNode.apply(statusViewModels[indexPath.row].layoutValues!)
+    cell.statusNode.disableLayout()
+//    measureTime(desc: "cellForRowAt" ) {
+//      cell.update(for: statusViewModels[indexPath.row])
+//    }
+    cell.update(for: statusViewModels[indexPath.row], needLayout: false)
+    cell.statusNode.apply(statusViewModels[indexPath.row].layoutValues!)
     return cell
   }
   
