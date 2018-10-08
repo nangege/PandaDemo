@@ -121,45 +121,7 @@ class StatusNode: ViewNode{
     retweetTextNode.attributeText = status.retweetAttributeText
     profileNode.updateFor(status)
     
-    var showCard = true
-    
-    if let images = status.images{
-      
-      if images.count == 1{
-        let image = images[0]
-        if image.keepSize || image.size.width < 1 || image.size.height < 1{
-          imageContainer.columnCount = 2
-          imageContainer.lineSpace = 0
-          imageContainer.aspectRatio = 1
-        }else{
-          imageContainer.columnCount = 2
-          imageContainer.lineSpace = 0
-          imageContainer.itemSpace = 0
-          imageContainer.aspectRatio = image.size.height/image.size.width
-        }
-      }else{
-        imageContainer.columnCount = 3
-        imageContainer.lineSpace = 4
-        imageContainer.itemSpace = 4
-        imageContainer.aspectRatio = 1
-      }
-      
-      showCard = false
-      imageContainer.hidden = false
-      for (index,node) in imageViews.enumerated(){
-        
-        if index < images.count{
-          let url = images[index]
-          node.hidden = false
-          node.kf.setImage(with: url)
-        }else{
-          node.hidden = true
-        }
-      }
-    }else{
-      imageContainer.hidden = true
-      imageViews.forEach{ $0.hidden = true}
-    }
+    let showCard = !layoutImages(status.images)
     
     if status.retweetAttributeText == nil{
       imageContainer.backgroundColor = .white
@@ -198,6 +160,50 @@ class StatusNode: ViewNode{
       }
       imageContainer.invalidateIntrinsicContentSize()
     }
+  }
+  
+  func layoutImages(_ images: [WBImageResource]?) -> Bool{
+    
+    var showImage = false
+    
+    if let images = images{
+      
+      if images.count == 1{
+        let image = images[0]
+        if image.keepSize || image.size.width < 1 || image.size.height < 1{
+          imageContainer.columnCount = 2
+          imageContainer.lineSpace = 0
+          imageContainer.aspectRatio = 1
+        }else{
+          imageContainer.columnCount = 2
+          imageContainer.lineSpace = 0
+          imageContainer.itemSpace = 0
+          imageContainer.aspectRatio = image.size.height/image.size.width
+        }
+      }else{
+        imageContainer.columnCount = 3
+        imageContainer.lineSpace = 4
+        imageContainer.itemSpace = 4
+        imageContainer.aspectRatio = 1
+      }
+      
+      showImage = true
+      imageContainer.hidden = false
+      for (index,node) in imageViews.enumerated(){
+        
+        if index < images.count{
+          let url = images[index]
+          node.hidden = false
+          node.kf.setImage(with: url)
+        }else{
+          node.hidden = true
+        }
+      }
+    }else{
+      imageContainer.hidden = true
+      imageViews.forEach{ $0.hidden = true}
+    }
+    return showImage
   }
 }
 
