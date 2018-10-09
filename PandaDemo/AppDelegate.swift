@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
     KingfisherManager.shared.defaultOptions = [.processor(WebPProcessor.default), .cacheSerializer(WebPSerializer.default)]
-    KingfisherManager.shared.cache.maxMemoryCost = 100 * 1024
+    KingfisherManager.shared.cache.maxMemoryCost = 100 * 9 * 1024
     return true
   }
 

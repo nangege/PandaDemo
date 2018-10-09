@@ -25,7 +25,8 @@ class StatusNode: ViewNode{
     return button
   }()
   
-  let imageViews: [ImageNode] = (0..<9).map{ index in
+  let imageViews: [ImageNode] = (0..<9)
+    .map{ index in
       let node = ImageNode()
       node.addAction(for: .touchUpInside) { (node, event) in
         print("ImageNode \(index) \(event)")
@@ -322,16 +323,16 @@ class CardNode: ViewNode{
     super.init()
     backgroundColor = UIColor(hex6: 0xf7f7f7)
     textNode.numberOfLines = 3
-    
+
     addSubnodes([imageNode,
                  textNode,
                  badgeNode,
                  buttonNode])
-    
+
     [self,imageNode,badgeNode].equal(.left,.top)
     imageNode.size == (70, 70)
     badgeNode.size == (25, 25)
-    
+
     textNode.left == imageNode.right + 10
     textNode.centerY == imageNode.centerY
     textNode.right <= right - 10

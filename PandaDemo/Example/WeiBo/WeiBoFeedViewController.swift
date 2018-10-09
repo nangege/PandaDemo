@@ -46,12 +46,12 @@ class WeiBoFeedViewController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "WeiBo",for: indexPath) as! WeiBoCell
-//    cell.statusNode.disableLayout()
-    measureTime(desc: "cellForRowAt" ) {
-      cell.update(for: statusViewModels[indexPath.row])
-    }
-//    cell.update(for: statusViewModels[indexPath.row], needLayout: false)
-//    cell.statusNode.apply(statusViewModels[indexPath.row].layoutValues!)
+    cell.statusNode.disableLayout()
+//    measureTime(desc: "cellForRowAt" ) {
+//      cell.update(for: statusViewModels[indexPath.row])
+//    }
+    cell.update(for: statusViewModels[indexPath.row], needLayout: false)
+    cell.statusNode.apply(statusViewModels[indexPath.row].layoutValues!)
     return cell
   }
   
