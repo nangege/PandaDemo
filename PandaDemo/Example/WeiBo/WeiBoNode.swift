@@ -59,6 +59,9 @@ class StatusNode: ViewNode{
     textNode.numberOfLines = -1
     textNode.userInteractionEnabled = true
     
+    textNode.fixedWidth = true
+    retweetTextNode.fixedWidth = true
+    
     vipBackground.contentMode = .scaleAspectToFit
     
     retweetTextNode.numberOfLines = -1

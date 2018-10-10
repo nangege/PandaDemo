@@ -22,7 +22,7 @@ class WeiBoFeedViewController: UITableViewController {
       statusNode.width == UIScreen.main.bounds.width
     
       DispatchQueue.global().async {
-        for index in 0..<2{
+        for index in 0..<7{
           autoreleasepool {
             let data = try! Data(contentsOf: URL(fileURLWithPath:Bundle.main.path(forResource: "weibo_\(index)", ofType: "json")! ))
             let items = WBTimelineItem.model(withJSON: data)
@@ -30,12 +30,22 @@ class WeiBoFeedViewController: UITableViewController {
             self.statusViewModels.append(contentsOf: models!)
           }
         }
-//        for status in self.statusViewModels{
-//          self.statusNode.update(status)
-//          self.statusNode.layoutIfNeeded()
-//          status.layoutValues = self.statusNode.layoutValues
-//          status.height = self.statusNode.frame.height
+        
+//        let indexs = [0, 1, 4, 10 ,13, 17, 27, 28, 31, 33 ,38, 41, 45, 46 ]
+//        let models = indexs.map{ return self.statusViewModels[$0]}
+//        self.statusViewModels = []
+//        for _ in 0..<10{
+//          self.statusViewModels.append(contentsOf: models)
 //        }
+        
+        for status in self.statusViewModels{
+          measureTime(desc: "height", action: {
+            self.statusNode.update(status)
+            self.statusNode.layoutIfNeeded()
+            status.layoutValues = self.statusNode.layoutValues
+            status.height = self.statusNode.frame.height
+          })
+        }
         
         DispatchQueue.main.async {
           self.tableView.reloadData()
@@ -71,10 +81,14 @@ class WeiBoFeedViewController: UITableViewController {
       return viewModel.height
     }
   
-    measureTime(desc: "heightForRow:") {
+    let time = measureTime(desc: "heightForRow:") {
       statusNode.update(viewModel)
       statusNode.layoutIfNeeded()
       viewModel.layoutValues = statusNode.layoutValues
+    }
+    
+    if time > 10{
+      print(indexPath.row)
     }
     
     viewModel.height = CGFloat(statusNode.layoutRect.size.height)
