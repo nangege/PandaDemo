@@ -40,7 +40,7 @@ extension Kingfisher where Base: ImageNode {
       self.placeholder = placeholder
     }
     
-    
+    cancelDownloadTask()
     setWebURL(resource.downloadURL)
     
     if base.shouldPreloadAllAnimation() {

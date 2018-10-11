@@ -198,7 +198,7 @@ class StatusNode: ViewNode{
         if index < images.count{
           let url = images[index]
           node.hidden = false
-          node.kf.setImage(with: url)
+          node.kf.setImage(with: url,placeholder: UIImage(named: "compose_toolbar_picture"))
         }else{
           node.hidden = true
         }
