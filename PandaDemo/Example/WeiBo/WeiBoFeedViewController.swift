@@ -20,6 +20,7 @@ class WeiBoFeedViewController: UITableViewController {
       tableView.separatorStyle = .none
       tableView.estimatedRowHeight = 180
       statusNode.width == UIScreen.main.bounds.width
+      statusNode.disableAutoUpdate(true)
     
       DispatchQueue.global().async {
         for index in 0..<7{

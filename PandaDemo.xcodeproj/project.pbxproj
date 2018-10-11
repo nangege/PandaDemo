@@ -34,7 +34,6 @@
 		383D08A7207E4B6300625A33 /* WeiBoNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383D087C207E4B6300625A33 /* WeiBoNode.swift */; };
 		383D08BF207E4B7E00625A33 /* WeiBoFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383D08BC207E4B7D00625A33 /* WeiBoFeedViewController.swift */; };
 		383D08C0207E4B7E00625A33 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383D08BD207E4B7D00625A33 /* Helper.swift */; };
-		389A19ED21672FD100F98AE0 /* RichTextNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389A19EC21672FD100F98AE0 /* RichTextNode.swift */; };
 		389A1A20216A348600F98AE0 /* WebP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 389A1A12216A348600F98AE0 /* WebP.framework */; };
 		389A1A21216A348600F98AE0 /* WebPSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389A1A14216A348600F98AE0 /* WebPSerializer.swift */; };
 		389A1A22216A348600F98AE0 /* CGImage+WebP.m in Sources */ = {isa = PBXBuildFile; fileRef = 389A1A15216A348600F98AE0 /* CGImage+WebP.m */; };
@@ -144,7 +143,6 @@
 		383D087C207E4B6300625A33 /* WeiBoNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeiBoNode.swift; sourceTree = "<group>"; };
 		383D08BC207E4B7D00625A33 /* WeiBoFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeiBoFeedViewController.swift; sourceTree = "<group>"; };
 		383D08BD207E4B7D00625A33 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
-		389A19EC21672FD100F98AE0 /* RichTextNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RichTextNode.swift; sourceTree = "<group>"; };
 		389A1A12216A348600F98AE0 /* WebP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WebP.framework; sourceTree = "<group>"; };
 		389A1A13216A348600F98AE0 /* KingfisherWebP-umbrella.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KingfisherWebP-umbrella.h"; sourceTree = "<group>"; };
 		389A1A14216A348600F98AE0 /* WebPSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebPSerializer.swift; sourceTree = "<group>"; };
@@ -287,7 +285,6 @@
 				381AEE3E21170BBB00F45C48 /* KingfishedNode.swift */,
 				3828B9B9211154220016BE62 /* vender */,
 				383D08C3207E4CC100625A33 /* WeiBo */,
-				389A19EC21672FD100F98AE0 /* RichTextNode.swift */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -493,7 +490,6 @@
 				389A1A21216A348600F98AE0 /* WebPSerializer.swift in Sources */,
 				389A1A23216A348600F98AE0 /* WebPProcessor.swift in Sources */,
 				3828B9C9211299E10016BE62 /* UIColorExtension.swift in Sources */,
-				389A19ED21672FD100F98AE0 /* RichTextNode.swift in Sources */,
 				381AEE3F21170BBB00F45C48 /* KingfishedNode.swift in Sources */,
 				3828B9BE2111543E0016BE62 /* NSObject+YYModel.m in Sources */,
 				383D08A6207E4B6300625A33 /* WeiBoCell.swift in Sources */,
