@@ -39,6 +39,8 @@
 		389A1A22216A348600F98AE0 /* CGImage+WebP.m in Sources */ = {isa = PBXBuildFile; fileRef = 389A1A15216A348600F98AE0 /* CGImage+WebP.m */; };
 		389A1A23216A348600F98AE0 /* WebPProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389A1A16216A348600F98AE0 /* WebPProcessor.swift */; };
 		389A1A24216A348600F98AE0 /* Image+WebP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389A1A17216A348600F98AE0 /* Image+WebP.swift */; };
+		38C55810217439FC00FC7FA0 /* NSBundle+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C55808217439FC00FC7FA0 /* NSBundle+YYAdd.m */; };
+		38C5581221743BBA00FC7FA0 /* EmoticonWeibo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 38C5581121743BBA00FC7FA0 /* EmoticonWeibo.bundle */; };
 		38CE112A214FF81800E886F5 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38CE1123214FF81800E886F5 /* Kingfisher.framework */; };
 		38CE112B214FF93A00E886F5 /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 38CE1123214FF81800E886F5 /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		38CE112C214FF99E00E886F5 /* Panda.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3806BA3D214FF63000D6981F /* Panda.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -151,6 +153,9 @@
 		389A1A17216A348600F98AE0 /* Image+WebP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Image+WebP.swift"; sourceTree = "<group>"; };
 		389A1A18216A348600F98AE0 /* CGImage+WebP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CGImage+WebP.h"; sourceTree = "<group>"; };
 		389A1A19216A348600F98AE0 /* KingfisherWebP.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = KingfisherWebP.modulemap; sourceTree = "<group>"; };
+		38C55808217439FC00FC7FA0 /* NSBundle+YYAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSBundle+YYAdd.m"; path = "Tools/NSBundle+YYAdd.m"; sourceTree = "<group>"; };
+		38C5580F217439FC00FC7FA0 /* NSBundle+YYAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSBundle+YYAdd.h"; path = "Tools/NSBundle+YYAdd.h"; sourceTree = "<group>"; };
+		38C5581121743BBA00FC7FA0 /* EmoticonWeibo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = EmoticonWeibo.bundle; sourceTree = "<group>"; };
 		38CE1123214FF81800E886F5 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -225,6 +230,8 @@
 		3828B9B9211154220016BE62 /* vender */ = {
 			isa = PBXGroup;
 			children = (
+				38C5580F217439FC00FC7FA0 /* NSBundle+YYAdd.h */,
+				38C55808217439FC00FC7FA0 /* NSBundle+YYAdd.m */,
 				389A1A10216A348600F98AE0 /* KingfisherWebP */,
 				3828B9C8211299E00016BE62 /* UIColorExtension.swift */,
 				3828B9C1211197360016BE62 /* Tools */,
@@ -328,6 +335,7 @@
 		38B03A7D215EEAC3000BE36C /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				38C5581121743BBA00FC7FA0 /* EmoticonWeibo.bundle */,
 				3828B9A3211151E30016BE62 /* API Dump */,
 				3828B9A1211151BE0016BE62 /* ResourceWeibo.bundle */,
 			);
@@ -469,6 +477,7 @@
 				383D0841207E4AC200625A33 /* Assets.xcassets in Resources */,
 				3828B9A2211151BE0016BE62 /* ResourceWeibo.bundle in Resources */,
 				3828B9B1211152070016BE62 /* weibo_2.json in Resources */,
+				38C5581221743BBA00FC7FA0 /* EmoticonWeibo.bundle in Resources */,
 				3828B9AE211152070016BE62 /* weibo_4.json in Resources */,
 				3828B9AD211152070016BE62 /* weibo_1.json in Resources */,
 				3828B9B0211152070016BE62 /* weibo_5.json in Resources */,
@@ -493,6 +502,7 @@
 				381AEE3F21170BBB00F45C48 /* KingfishedNode.swift in Sources */,
 				3828B9BE2111543E0016BE62 /* NSObject+YYModel.m in Sources */,
 				383D08A6207E4B6300625A33 /* WeiBoCell.swift in Sources */,
+				38C55810217439FC00FC7FA0 /* NSBundle+YYAdd.m in Sources */,
 				383D08A7207E4B6300625A33 /* WeiBoNode.swift in Sources */,
 				389A1A24216A348600F98AE0 /* Image+WebP.swift in Sources */,
 				383D08C0207E4B7E00625A33 /* Helper.swift in Sources */,

@@ -124,6 +124,7 @@ class StatusNode: ViewNode{
     textNode.attributeText = status.textAttributeText
     retweetTextNode.attributeText = status.retweetAttributeText
     profileNode.updateFor(status)
+    toolBarNode.updateFor(status)
     
     let showCard = !layoutImages(status.images)
     
@@ -300,7 +301,7 @@ class ProfileNode: ViewNode{
   }
   
   func updateFor(_ status: WBStatusViewModel){
-    nameNode.text = status.name
+    nameNode.attributeText = status.name
     sourceNode.attributeText = status.sourceAttributeText
     
     if let image = status.avatarBadge{
@@ -442,5 +443,14 @@ class ToolBarNode: ViewNode{
 
     topLine.top == top
     bottomLine.bottom == bottom
+  }
+  
+  func updateFor(_ status: WBStatusViewModel){
+    repostButton.setTitle(status.repostText, for: .normal)
+    likeButton.setTitle(status.likeText, for: .normal)
+    commonButton.setTitle(status.commentText, for: .normal)
+    repostButton.layoutSubItems()
+    likeButton.layoutSubItems()
+    commonButton.layoutSubItems()
   }
 }

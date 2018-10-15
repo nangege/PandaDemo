@@ -8,10 +8,88 @@
 
 #import "WBStatusHelper.h"
 #import "NSObject+YYModel.h"
+#import "NSBundle+YYAdd.h"
 #import "WBModel.h"
 #import "PandaDemo-Swift.h"
 
+/**
+ Get the `AppleColorEmoji` font's ascent with a specified font size.
+ It may used to create custom emoji.
+ 
+ @param fontSize  The specified font size.
+ @return The font ascent.
+ */
+static inline CGFloat YYEmojiGetAscentWithFontSize(CGFloat fontSize) {
+  if (fontSize < 16) {
+    return 1.25 * fontSize;
+  } else if (16 <= fontSize && fontSize <= 24) {
+    return 0.5 * fontSize + 12;
+  } else {
+    return fontSize;
+  }
+}
+
+/**
+ Get the `AppleColorEmoji` font's glyph bounding rect with a specified font size.
+ It may used to create custom emoji.
+ 
+ @param fontSize  The specified font size.
+ @return The font glyph bounding rect.
+ */
+static inline CGRect YYEmojiGetGlyphBoundingRectWithFontSize(CGFloat fontSize) {
+  CGRect rect;
+  rect.origin.x = 0.75;
+  rect.size.width = rect.size.height = YYEmojiGetAscentWithFontSize(fontSize);
+  if (fontSize < 16) {
+    rect.origin.y = -0.2525 * fontSize;
+  } else if (16 <= fontSize && fontSize <= 24) {
+    rect.origin.y = 0.1225 * fontSize -6;
+  } else {
+    rect.origin.y = -0.1275 * fontSize;
+  }
+  return rect;
+}
+
+
+@implementation NSMutableArray(YY)
+
+- (void)insertObjects:(NSArray *)objects atIndex:(NSUInteger)index {
+  NSUInteger i = index;
+  for (id obj in objects) {
+    [self insertObject:obj atIndex:i++];
+  }
+}
+
+@end
+
+@implementation NSAttributedString(YY)
+
++ (NSAttributedString *)attachmentStringWithEmojiImage:(UIImage *)image
+                                                     fontSize:(CGFloat)fontSize {
+  if (!image || fontSize <= 0) return nil;
+
+  CGRect bounding = YYEmojiGetGlyphBoundingRectWithFontSize(fontSize);
+  
+  NSTextAttachment *imageAttatchment = [[NSTextAttachment alloc] init];
+  imageAttatchment.image = image;
+  imageAttatchment.bounds = bounding;
+  NSAttributedString *attributedText = [NSAttributedString attributedStringWithAttachment:imageAttatchment];
+  return attributedText;
+}
+
+@end
+
 @implementation WBStatusHelper
+
++ (NSCache *)imageCache {
+  static NSCache *cache;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    cache = [NSCache new];
+    cache.name = @"TwitterImageCache";
+  });
+  return cache;
+}
 
 + (NSBundle *)bundle {
     static NSBundle *bundle;
@@ -249,6 +327,48 @@
   return sourceText;
 }
 
++ (NSAttributedString *)attributedNameFor:(WBUser *)user{
+  
+  NSString *nameStr = nil;
+  if (user.remark.length) {
+    nameStr = user.remark;
+  } else if (user.screenName.length) {
+    nameStr = user.screenName;
+  } else {
+    nameStr = user.name;
+  }
+  if (nameStr.length == 0) {
+    return [[NSAttributedString alloc] initWithString:@""];
+  }
+  
+  NSMutableAttributedString *nameText = [[NSMutableAttributedString alloc] initWithString:nameStr];
+  
+  // 蓝V
+  if (user.userVerifyType == WBUserVerifyTypeOrganization) {
+    UIImage *blueVImage = [WBStatusHelper imageNamed:@"avatar_enterprise_vip"];
+    NSAttributedString *blueVText = [NSAttributedString attachmentStringWithEmojiImage:blueVImage fontSize:16];
+    [nameText appendAttributedString:blueVText];
+  }
+  
+  // VIP
+  if (user.mbrank > 0) {
+    UIImage *yelllowVImage = [WBStatusHelper imageNamed:[NSString stringWithFormat:@"common_icon_membership_level%d",user.mbrank]];
+    if (!yelllowVImage) {
+      yelllowVImage = [WBStatusHelper imageNamed:@"common_icon_membership"];
+    }
+    NSAttributedString *vipText = [NSAttributedString attachmentStringWithEmojiImage:yelllowVImage fontSize:14];
+    [nameText appendAttributedString:[[NSAttributedString alloc] initWithString:@" "]];
+    [nameText appendAttributedString:vipText];
+  }
+
+  UIColor *color = [UIColor colorWithHex:user.mbrank > 0 ? 0x333333 : 0xf26220];
+  [nameText addAttributes:@{NSForegroundColorAttributeName: color,NSFontAttributeName: [UIFont systemFontOfSize:16]} range:NSMakeRange(0, nameText.length)];
+  
+  
+  
+  return nameText;
+}
+
 + (NSMutableAttributedString *)textWithStatus:(WBStatus *)status
                                      isRetweet:(BOOL)isRetweet
                                       fontSize:(CGFloat)fontSize
@@ -309,9 +429,11 @@
       }
       
 //      if ([text attribute:YYTextHighlightAttributeName atIndex:range.location] == nil) {
-//
-//        // 替换的内容
-//        NSMutableAttributedString *replace = [[NSMutableAttributedString alloc] initWithString:urlTitle];
+
+        // 替换的内容
+        NSMutableAttributedString *replace = [[NSMutableAttributedString alloc] initWithString:urlTitle];
+      [replace addAttributes:@{NSFontAttributeName: font,
+                               NSForegroundColorAttributeName: highlightedColor} range:NSMakeRange(0, replace.length)];
 //        if (wburl.urlTypePic.length) {
 //          // 链接头部有个图片附件 (要从网络获取)
 //          NSURL *picURL = [WBStatusHelper defaultURLForImageURL:wburl.urlTypePic];
@@ -321,28 +443,29 @@
 //        }
 //        replace.font = font;
 //        replace.color = kWBCellTextHighlightColor;
-//
-//        // 高亮状态
+
+        // 高亮状态
 //        YYTextHighlight *highlight = [YYTextHighlight new];
 //        [highlight setBackgroundBorder:highlightBorder];
 //        // 数据信息，用于稍后用户点击
 //        highlight.userInfo = @{kWBLinkURLName : wburl};
 //        [replace setTextHighlight:highlight range:NSMakeRange(0, replace.length)];
-//
-//        // 添加被替换的原始字符串，用于复制
+
+        // 添加被替换的原始字符串，用于复制
 //        YYTextBackedString *backed = [YYTextBackedString stringWithString:[text.string substringWithRange:range]];
 //        [replace setTextBackedString:backed range:NSMakeRange(0, replace.length)];
-//
-//        // 替换
-//        [text replaceCharactersInRange:range withAttributedString:replace];
-//
-//        searchRange.location = searchRange.location + (replace.length ? replace.length : 1);
-//        if (searchRange.location + 1 >= text.length) break;
-//        searchRange.length = text.length - searchRange.location;
-//      } else {
-        searchRange.location = searchRange.location + (searchRange.length ? searchRange.length : 1);
-        if (searchRange.location + 1>= text.length) break;
+
+        // 替换
+        [text replaceCharactersInRange:range withAttributedString:replace];
+
+        searchRange.location = searchRange.location + (replace.length ? replace.length : 1);
+        if (searchRange.location + 1 >= text.length) break;
         searchRange.length = text.length - searchRange.location;
+//      }
+//      else {
+//        searchRange.location = searchRange.location + (searchRange.length ? searchRange.length : 1);
+//        if (searchRange.location + 1>= text.length) break;
+//        searchRange.length = text.length - searchRange.location;
 //      }
     } while (1);
   }
@@ -390,23 +513,23 @@
   }
   
   // 匹配 [表情]
-//  NSArray<NSTextCheckingResult *> *emoticonResults = [[WBStatusHelper regexEmoticon] matchesInString:text.string options:kNilOptions range:text.rangeOfAll];
-//  NSUInteger emoClipLength = 0;
-//  for (NSTextCheckingResult *emo in emoticonResults) {
-//    if (emo.range.location == NSNotFound && emo.range.length <= 1) continue;
-//    NSRange range = emo.range;
-//    range.location -= emoClipLength;
+  NSArray<NSTextCheckingResult *> *emoticonResults = [[WBStatusHelper regexEmoticon] matchesInString:text.string options:kNilOptions range:NSMakeRange(0, text.length)];
+  NSUInteger emoClipLength = 0;
+  for (NSTextCheckingResult *emo in emoticonResults) {
+    if (emo.range.location == NSNotFound && emo.range.length <= 1) continue;
+    NSRange range = emo.range;
+    range.location -= emoClipLength;
 //    if ([text attribute:YYTextHighlightAttributeName atIndex:range.location]) continue;
 //    if ([text attribute:YYTextAttachmentAttributeName atIndex:range.location]) continue;
-//    NSString *emoString = [text.string substringWithRange:range];
-//    NSString *imagePath = [WBStatusHelper emoticonDic][emoString];
-//    UIImage *image = [WBStatusHelper imageWithPath:imagePath];
-//    if (!image) continue;
-//
-//    NSAttributedString *emoText = [NSAttributedString attachmentStringWithEmojiImage:image fontSize:fontSize];
-//    [text replaceCharactersInRange:range withAttributedString:emoText];
-//    emoClipLength += range.length - 1;
-//  }
+    NSString *emoString = [text.string substringWithRange:range];
+    NSString *imagePath = [WBStatusHelper emoticonDic][emoString];
+    UIImage *image = [WBStatusHelper imageWithPath:imagePath];
+    if (!image) continue;
+
+    NSAttributedString *emoText = [NSAttributedString attachmentStringWithEmojiImage:image fontSize:fontSize];
+    [text replaceCharactersInRange:range withAttributedString:emoText];
+    emoClipLength += range.length - 1;
+  }
   NSMutableParagraphStyle * style = [[NSMutableParagraphStyle alloc] init];
   style.lineSpacing = 3;
   [text addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, text.length)];
@@ -414,55 +537,88 @@
   return text;
 }
 
++ (UIImage *)imageWithPath:(NSString *)path{
+  if (!path) return nil;
+  UIImage *image = [[self imageCache] objectForKey:path];
+  if (image) return image;
+  if (path.pathScale == 1) {
+    // 查找 @2x @3x 的图片
+    NSArray *scales = [NSBundle preferredScales];
+    for (NSNumber *scale in scales) {
+      image = [UIImage imageWithContentsOfFile:[path stringByAppendingPathScale:scale.floatValue]];
+      if (image) break;
+    }
+  } else {
+    image = [UIImage imageWithContentsOfFile:path];
+  }
+  if (image) {
+    [[self imageCache] setObject:image forKey:path];
+  }
+  return image;
+}
 
-//+ (NSArray<WBEmoticonGroup *> *)emoticonGroups {
-//    static NSMutableArray *groups;
-//    static dispatch_once_t onceToken;
-//    dispatch_once(&onceToken, ^{
-//        NSString *emoticonBundlePath = [[NSBundle mainBundle] pathForResource:@"EmoticonWeibo" ofType:@"bundle"];
-//        NSString *emoticonPlistPath = [emoticonBundlePath stringByAppendingPathComponent:@"emoticons.plist"];
-//        NSDictionary *plist = [NSDictionary dictionaryWithContentsOfFile:emoticonPlistPath];
-//        NSArray *packages = plist[@"packages"];
-//        groups = (NSMutableArray *)[NSArray modelArrayWithClass:[WBEmoticonGroup class] json:packages];
-//        
-//        NSMutableDictionary *groupDic = [NSMutableDictionary new];
-//        for (int i = 0, max = (int)groups.count; i < max; i++) {
-//            WBEmoticonGroup *group = groups[i];
-//            if (group.groupID.length == 0) {
-//                [groups removeObjectAtIndex:i];
-//                i--;
-//                max--;
-//                continue;
-//            }
-//            NSString *path = [emoticonBundlePath stringByAppendingPathComponent:group.groupID];
-//            NSString *infoPlistPath = [path stringByAppendingPathComponent:@"info.plist"];
-//            NSDictionary *info = [NSDictionary dictionaryWithContentsOfFile:infoPlistPath];
-//            [group modelSetWithDictionary:info];
-//            if (group.emoticons.count == 0) {
-//                i--;
-//                max--;
-//                continue;
-//            }
-//            groupDic[group.groupID] = group;
-//        }
-//        
-//        NSArray<NSString *> *additionals = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[emoticonBundlePath stringByAppendingPathComponent:@"additional"] error:nil];
-//        for (NSString *path in additionals) {
-//            WBEmoticonGroup *group = groupDic[path];
-//            if (!group) continue;
-//            NSString *infoJSONPath = [[[emoticonBundlePath stringByAppendingPathComponent:@"additional"] stringByAppendingPathComponent:path] stringByAppendingPathComponent:@"info.json"];
-//            NSData *infoJSON = [NSData dataWithContentsOfFile:infoJSONPath];
-//            WBEmoticonGroup *addGroup = [WBEmoticonGroup modelWithJSON:infoJSON];
-//            if (addGroup.emoticons.count) {
-//                for (WBEmoticon *emoticon in addGroup.emoticons) {
-//                    emoticon.group = group;
-//                }
-//                [((NSMutableArray *)group.emoticons) insertObjects:addGroup.emoticons atIndex:0];
-//            }
-//        }
-//    });
-//    return groups;
-//}
++ (UIImage *)imageNamed:(NSString *)name {
+  if (!name) return nil;
+  UIImage *image = [[self imageCache] objectForKey:name];
+  if (image) return image;
+  NSString *ext = name.pathExtension;
+  if (ext.length == 0) ext = @"png";
+  NSString *path = [[self bundle] pathForScaledResource:name ofType:ext];
+  if (!path) return nil;
+  image = [UIImage imageWithContentsOfFile:path];
+  if (!image) return nil;
+  [[self imageCache] setObject:image forKey:name];
+  return image;
+}
+
++ (NSArray<WBEmoticonGroup *> *)emoticonGroups {
+    static NSMutableArray *groups;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSString *emoticonBundlePath = [[NSBundle mainBundle] pathForResource:@"EmoticonWeibo" ofType:@"bundle"];
+        NSString *emoticonPlistPath = [emoticonBundlePath stringByAppendingPathComponent:@"emoticons.plist"];
+        NSDictionary *plist = [NSDictionary dictionaryWithContentsOfFile:emoticonPlistPath];
+        NSArray *packages = plist[@"packages"];
+        groups = (NSMutableArray *)[NSArray modelArrayWithClass:[WBEmoticonGroup class] json:packages];
+      
+        NSMutableDictionary *groupDic = [NSMutableDictionary new];
+        for (int i = 0, max = (int)groups.count; i < max; i++) {
+            WBEmoticonGroup *group = groups[i];
+            if (group.groupID.length == 0) {
+                [groups removeObjectAtIndex:i];
+                i--;
+                max--;
+                continue;
+            }
+            NSString *path = [emoticonBundlePath stringByAppendingPathComponent:group.groupID];
+            NSString *infoPlistPath = [path stringByAppendingPathComponent:@"info.plist"];
+            NSDictionary *info = [NSDictionary dictionaryWithContentsOfFile:infoPlistPath];
+            [group modelSetWithDictionary:info];
+            if (group.emoticons.count == 0) {
+                i--;
+                max--;
+                continue;
+            }
+            groupDic[group.groupID] = group;
+        }
+      
+        NSArray<NSString *> *additionals = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[emoticonBundlePath stringByAppendingPathComponent:@"additional"] error:nil];
+        for (NSString *path in additionals) {
+            WBEmoticonGroup *group = groupDic[path];
+            if (!group) continue;
+            NSString *infoJSONPath = [[[emoticonBundlePath stringByAppendingPathComponent:@"additional"] stringByAppendingPathComponent:path] stringByAppendingPathComponent:@"info.json"];
+            NSData *infoJSON = [NSData dataWithContentsOfFile:infoJSONPath];
+            WBEmoticonGroup *addGroup = [WBEmoticonGroup modelWithJSON:infoJSON];
+            if (addGroup.emoticons.count) {
+                for (WBEmoticon *emoticon in addGroup.emoticons) {
+                    emoticon.group = group;
+                }
+                [((NSMutableArray *)group.emoticons) insertObjects:addGroup.emoticons atIndex:0];
+            }
+        }
+    });
+    return groups;
+}
 
 
 /*

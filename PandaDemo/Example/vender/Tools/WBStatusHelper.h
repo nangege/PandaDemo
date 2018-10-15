@@ -23,8 +23,7 @@
 /// 微博表情 Array<WBEmotionGroup> (实际应该做成动态更新的)
 + (NSArray<WBEmoticonGroup *> *)emoticonGroups;
 
-
-
++ (UIImage *)imageNamed:(NSString *)name;
 /// 从path创建图片 (有缓存)
 + (UIImage *)imageWithPath:(NSString *)path;
 
@@ -48,6 +47,9 @@
 
 /// 表情字典 key:[偷笑] value:ImagePath
 + (NSDictionary *)emoticonDic;
+
+/// 用户名称
++ (NSAttributedString *)attributedNameFor:(WBUser *)user;
 
 /// 时间和来源
 + (NSAttributedString *)sourceFor:(WBStatus *)status;

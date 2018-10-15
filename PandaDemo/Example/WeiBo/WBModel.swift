@@ -31,7 +31,7 @@ struct WBImageResource: Resource {
 
 class WBStatusViewModel{
   
-  var name: String = ""
+  var name: NSAttributedString? = nil
   var title: String? = nil
   var textAttributeText: NSAttributedString? = nil
   var retweetAttributeText: NSAttributedString? = nil
@@ -44,10 +44,13 @@ class WBStatusViewModel{
   var cardText: NSAttributedString? = nil
   var cardImage: URL? = nil
   var layoutValues: LayoutValues? = nil
+  var commentText: String = "评论"
+  var repostText: String = "转发"
+  var likeText: String = "点赞"
   
   init(status: WBStatus) {
 
-    name = nameFor(status)
+    name = WBStatusHelper.attributedName(for: status.user)
     
     if let title = status.title?.text{
       self.title = title
@@ -98,18 +101,25 @@ class WBStatusViewModel{
     if let pageInfo = status.pageInfo{
       updateFor(pageInfo: pageInfo)
     }
+    
+    repostText = shortedDescForCount(status.repostsCount,"转发")
+    commentText = shortedDescForCount(status.commentsCount,"评论")
+    likeText = shortedDescForCount(status.attitudesCount,"点赞")
   }
   
-  func nameFor(_ status: WBStatus) -> String{
-    var name = status.user!.remark
-    if name == nil || name!.count == 0{
-      name = status.user!.screenName
+  func shortedDescForCount(_ count: Int32,_ defaultText: String = "") -> String{
+    if count <= 0{
+      return defaultText
+    }
+    if count < 9999{
+      return "\(count)"
     }
     
-    if name == nil || name!.count == 0{
-      name = status.user!.name
+    if count < 999999{
+      return "\(count/10000)万"
     }
-    return name ?? ""
+    
+    return "\(count/10000000)千万"
   }
   
   func updateFor(pageInfo: WBPageInfo){
