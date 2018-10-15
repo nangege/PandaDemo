@@ -9,6 +9,20 @@
 #import <UIKit/UIKit.h>
 #import "WBModel.h"
 
+/// 卡片类型 (这里随便写的，只适配了微博中常见的类型)
+typedef NS_ENUM(NSUInteger, WBStatusCardType) {
+  WBStatusCardTypeNone = 0, ///< 没卡片
+  WBStatusCardTypeNormal,   ///< 一般卡片布局
+  WBStatusCardTypeVideo,    ///< 视频
+};
+
+/// 最下方Tag类型，也是随便写的，微博可能有更多类型同时存在等情况
+typedef NS_ENUM(NSUInteger, WBStatusTagType) {
+  WBStatusTagTypeNone = 0, ///< 没Tag
+  WBStatusTagTypeNormal,   ///< 文本
+  WBStatusTagTypePlace,    ///< 地点
+};
+
 /**
  很多都写死单例了，毕竟只是 Demo。。
  */

@@ -35,17 +35,20 @@ class WeiBoFeedViewController: UITableViewController {
 //        let indexs = [0, 1, 4, 10 ,13, 17, 27, 28, 31, 33 ,38, 41, 45, 46 ]
 //        let models = indexs.map{ return self.statusViewModels[$0]}
 //        self.statusViewModels = []
-//        for _ in 0..<10{
+////        for _ in 0..<10{
 //          self.statusViewModels.append(contentsOf: models)
-//        }
+////        }
         
         for status in self.statusViewModels{
-          measureTime(desc: "height", action: {
+          let time = measureTime(desc: "height", action: {
             self.statusNode.update(status)
             self.statusNode.layoutIfNeeded()
             status.layoutValues = self.statusNode.layoutValues
             status.height = self.statusNode.frame.height
           })
+          if time >= 10{
+            //print(status.textAttributeText?.string)
+          }
         }
         
         DispatchQueue.main.async {

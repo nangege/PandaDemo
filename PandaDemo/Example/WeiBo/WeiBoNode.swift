@@ -42,7 +42,7 @@ class StatusNode: ViewNode{
   let retweetBackground = ViewNode()
   let retweetTextNode = TextNode()
   let cardNode = CardNode()
-
+  let tagNode = TagNode()
   var retYAxisConstraint: [LayoutConstraint]!
   
   override init() {
@@ -69,7 +69,7 @@ class StatusNode: ViewNode{
     
     addSubnodes([topBackground,titleNode,profileNode,vipBackground,
                  menuButton,textNode,retweetBackground,imageContainer,
-                 cardNode,toolBarNode,bottomBackground])
+                 cardNode,tagNode,toolBarNode,bottomBackground])
     
     retweetBackground.addSubnode(retweetTextNode)
     imageContainer.addSubnodes(imageViews)
@@ -110,7 +110,10 @@ class StatusNode: ViewNode{
     cardNode.xSide == xSide.insets(sideInset)
     cardNode.top == imageContainer.bottom
     
-    toolBarNode.top == cardNode.bottom + 10
+    tagNode.xSide == xSide.insets(sideInset)
+    tagNode.top == cardNode.bottom
+    
+    toolBarNode.top == tagNode.bottom + 10
     toolBarNode.bottom == bottom - bottomInset
     toolBarNode.xSide == self
     toolBarNode.height == 35
@@ -124,6 +127,7 @@ class StatusNode: ViewNode{
     textNode.attributeText = status.textAttributeText
     retweetTextNode.attributeText = status.retweetAttributeText
     profileNode.updateFor(status)
+    tagNode.updateForTag(status.tag)
     toolBarNode.updateFor(status)
     
     let showCard = !layoutImages(status.images)
@@ -141,19 +145,7 @@ class StatusNode: ViewNode{
       vipBackground.hidden = true
     }
     
-    if showCard,let cardText = status.cardText{
-      cardNode.textNode.attributeText = cardText
-      cardNode.hidden = false
-    
-      if let url = status.cardImage{
-        cardNode.imageNode.hidden = false
-        cardNode.imageNode.kf.setImage(with: ImageResource(downloadURL: url))
-      }else{
-        cardNode.imageNode.hidden = true
-      }
-    }else{
-      cardNode.hidden = true
-    }
+    cardNode.updateForStatus(status, showCard: showCard)
     
     if needLayout{
       if let retweet = status.retweetAttributeText ,retweet.length > 0{
@@ -319,10 +311,12 @@ class ProfileNode: ViewNode{
 
 class CardNode: ViewNode{
   let imageNode = ImageNode()
-  let buttonNode = ButtonNode()
   let textNode = TextNode()
   let badgeNode = ImageNode()
-  
+  var space: LayoutConstraint!
+  let videoNode = ImageNode()
+  let videoButton = ButtonNode()
+  var cardType = WBStatusCardType.none
   override init() {
     super.init()
     backgroundColor = UIColor(hex6: 0xf7f7f7)
@@ -331,15 +325,51 @@ class CardNode: ViewNode{
     addSubnodes([imageNode,
                  textNode,
                  badgeNode,
-                 buttonNode])
-
+                 videoNode])
+    videoNode.addSubnode(videoButton)
     [self,imageNode,badgeNode].equal(.left,.top)
     imageNode.size == (70, 70)
     badgeNode.size == (25, 25)
-
-    textNode.left == imageNode.right + 10
+    
+    videoButton.edge == videoNode
+    videoButton.setImage(UIImage(named: "multimedia_videocard_play"), for: .normal)
+    
+    space = textNode.left == imageNode.right + 10
     textNode.centerY == imageNode.centerY
-    textNode.right <= right - 10
+    textNode.right == right - 10
+    textNode.fixedWidth = true
+    [self,videoNode].equal(.left,.top,.bottom)
+    videoNode.width == videoNode.height
+    setContentHuggingPriorty(for: .vertical, priorty: .required)
+  }
+  
+  func updateForStatus(_ status: WBStatusViewModel,showCard: Bool){
+    cardType = status.cardType
+    if !showCard || cardType == .none{
+      hidden = true
+      return
+    }
+    if cardType == .video{
+      hidden = false
+      videoNode.hidden = false
+      [imageNode,badgeNode,textNode].forEach{ $0.hidden = true}
+      videoNode.kf.setImage(with: WBImageResource(downloadURL: status.pagPic!))
+    }else{
+      let cardText = status.cardText!
+      hidden = false
+      videoNode.hidden = true
+      [imageNode,badgeNode,textNode].forEach{ $0.hidden = false}
+      textNode.attributeText = cardText
+    
+      if let url = status.cardImage{
+        space.constant = 10
+        imageNode.hidden = false
+        imageNode.kf.setImage(with: ImageResource(downloadURL: url))
+      }else{
+        space.constant = -60
+        imageNode.hidden = true
+      }
+    }
   }
   
   override var hidden: Bool{
@@ -352,21 +382,60 @@ class CardNode: ViewNode{
     if hidden{
       return CGSize(width: InvalidIntrinsicMetric,height: 0.0)
     }else{
+      if cardType == .video{
+        return CGSize(width: InvalidIntrinsicMetric,height: 200)
+      }
       return CGSize(width: InvalidIntrinsicMetric,height: 70.0)
     }
   }
 }
 
 
-class TagNode: ViewNode{
-  let button = ButtonNode()
+class TagNode: ControlNode{
   let textNode = TextNode()
   let imageNode = ImageNode()
+  var tag: WBTag? = nil
   
   override init() {
     super.init()
-    addSubnodes([button,textNode,imageNode])
+    addSubnodes([textNode,imageNode])
+    textNode.font = UIFont.systemFont(ofSize: 12)
+    [self,imageNode,textNode].equal(.centerY)
+    imageNode.left == left
+    textNode.left == imageNode.right + 6
+    textNode.right <= right
   }
+  
+  func updateForTag(_ tag: WBTag?){
+    self.tag = tag
+    invalidateIntrinsicContentSize()
+    guard let tag = tag else{
+      hidden = true
+      return
+    }
+    hidden = false
+    textNode.text = tag.tagName
+    if tag.tagType == 1{
+      textNode.textColor = UIColor.init(white: 0.217, alpha: 1)
+      imageNode.image = UIImage(named: "timeline_icon_locate")
+    }else{
+      textNode.textColor = UIColor("527ead")
+      imageNode.kf.setImage(with: WBImageResource(downloadURL: tag.urlTypePic))
+    }
+  }
+  
+  override var itemIntrinsicContentSize: CGSize{
+    guard let tag = tag else{
+      return CGSize(width: InvalidIntrinsicMetric, height: 0)
+    }
+    
+    if tag.tagType == 1{
+      return CGSize(width: InvalidIntrinsicMetric, height: 40)
+    }
+    
+    return CGSize(width: InvalidIntrinsicMetric, height: 32)
+  }
+  
 }
 
 class ToolBarNode: ViewNode{
@@ -449,6 +518,7 @@ class ToolBarNode: ViewNode{
     repostButton.setTitle(status.repostText, for: .normal)
     likeButton.setTitle(status.likeText, for: .normal)
     commonButton.setTitle(status.commentText, for: .normal)
+    
     repostButton.layoutSubItems()
     likeButton.layoutSubItems()
     commonButton.layoutSubItems()

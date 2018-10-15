@@ -47,6 +47,9 @@ class WBStatusViewModel{
   var commentText: String = "评论"
   var repostText: String = "转发"
   var likeText: String = "点赞"
+  var tag: WBTag?
+  var cardType: WBStatusCardType = .none
+  var pagPic: URL? = nil
   
   init(status: WBStatus) {
 
@@ -99,9 +102,18 @@ class WBStatusViewModel{
     }
     
     if let pageInfo = status.pageInfo{
-      updateFor(pageInfo: pageInfo)
+      if pageInfo.type == 11 && pageInfo.objectType == "video"{
+        cardType = .video
+        pagPic = pageInfo.pagePic
+      }else{
+        cardType = .normal
+        cardText = cardTextFrom(pageInfo)
+      }
     }
     
+    if let tags = status.tagStruct{
+      tag = tags.first
+    }
     repostText = shortedDescForCount(status.repostsCount,"转发")
     commentText = shortedDescForCount(status.commentsCount,"评论")
     likeText = shortedDescForCount(status.attitudesCount,"点赞")
@@ -122,7 +134,7 @@ class WBStatusViewModel{
     return "\(count/10000000)千万"
   }
   
-  func updateFor(pageInfo: WBPageInfo){
+  func cardTextFrom(_ pageInfo: WBPageInfo) -> NSAttributedString{
     let attributePage = NSMutableAttributedString()
     if let title = pageInfo.pageTitle{
       let attributeTitle = NSMutableAttributedString(string: title,
@@ -169,6 +181,6 @@ class WBStatusViewModel{
     paraStyle.minimumLineHeight = 20
     attributePage.addAttribute(.paragraphStyle, value: paraStyle, range: NSRange(location: 0, length: attributePage.length))
     
-    cardText = attributePage
+    return attributePage
   }
 }
