@@ -8,7 +8,8 @@
 
 import Foundation
 
-@discardableResult func measureTime(desc: String? = nil,action:()->()) -> Double{
+@discardableResult
+func measureTime(desc: String? = nil,action:()->()) -> Double{
   let renderStart = CFAbsoluteTimeGetCurrent()
   action()
   let renderEnd = CFAbsoluteTimeGetCurrent()
