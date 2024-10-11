@@ -20,7 +20,7 @@ extension ImageNode: KingfisherCompatible{}
 extension Kingfisher where Base: ImageNode {
 
   @discardableResult
-  public func setImage(with resource: Resource?,
+  public func setImage(with resource:  Resource?,
                        placeholder: UIImage? = nil,
                        options: KingfisherOptionsInfo? = nil,
                        progressBlock: DownloadProgressBlock? = nil,

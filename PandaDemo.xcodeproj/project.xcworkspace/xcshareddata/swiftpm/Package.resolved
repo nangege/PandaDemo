@@ -1,0 +1,33 @@
+{
+  "originHash" : "abd09b52595601dc9ea2fccc364e5c3abd6460010a0ef9df7cc4898d772bb92d",
+  "pins" : [
+    {
+      "identity" : "cassowary",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:nangege/Cassowary.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "694490d0a41660b0737c5c913d972e9542e65ebb"
+      }
+    },
+    {
+      "identity" : "layoutable",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:nangege/Layoutable.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "43fbf7d5a44d0a880c9238b03f77a11545348176"
+      }
+    },
+    {
+      "identity" : "panda",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:nangege/Panda.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "e3dca924e9d9d3281023669506ca6a1f017507b3"
+      }
+    }
+  ],
+  "version" : 3
+}

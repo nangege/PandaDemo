@@ -139,7 +139,7 @@ class StatusNode: ViewNode{
     }
     
     if let url = status.picBackground{
-      vipBackground.kf.setImage(with: ImageResource(downloadURL: url))
+      vipBackground.kf.setImage(with: KFImageResource(downloadURL: url))
       vipBackground.hidden = false
     }else{
       vipBackground.hidden = true
@@ -303,7 +303,7 @@ class ProfileNode: ViewNode{
       badgeNode.hidden = true
     }
     
-    avatarNode.kf.setImage(with: ImageResource(downloadURL: status.avatarImageUrl!))
+    avatarNode.kf.setImage(with: KFImageResource(downloadURL: status.avatarImageUrl!))
   }
   
 }
@@ -364,7 +364,7 @@ class CardNode: ViewNode{
       if let url = status.cardImage{
         space.constant = 10
         imageNode.hidden = false
-        imageNode.kf.setImage(with: ImageResource(downloadURL: url))
+        imageNode.kf.setImage(with: KFImageResource(downloadURL: url))
       }else{
         space.constant = -60
         imageNode.hidden = true

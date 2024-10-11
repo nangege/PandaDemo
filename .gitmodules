@@ -1,9 +1,0 @@
-[submodule "Cassowary"]
-	path = Cassowary
-	url = git@github.com:nangege/Cassowary.git
-[submodule "Layoutable"]
-	path = Layoutable
-	url = git@github.com:nangege/Layoutable.git
-[submodule "Panda"]
-	path = Panda
-	url = git@github.com:nangege/Panda.git
